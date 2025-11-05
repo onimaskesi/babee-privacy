@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Deletion - Babee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --soft-peach: #ebe2fc;
+            --gentle-coral: #deb9da;
+            --baby-pink: #a18bc3;
+            --warm-beige: #fbd1d5;
+            --calm-sky: #db8db8;
+            --text-dark: #4a3f6e;
+            --text-light: #8a82a6;
+            --border-light: #ded9e6;
+            --card-bg: #ffffff;
+            --error: #ff6b6b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--baby-pink);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--calm-sky);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+
+        .bg-shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--warm-beige);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 60px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-30px, 30px) rotate(270deg);
+            }
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+        }
+
+        .language-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switch a.active {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+        }
+
+        .language-switch a:not(.active):hover {
+            background: var(--soft-peach);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 48px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-light);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 12px 32px rgba(161, 139, 195, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+            border-left: 5px solid var(--error);
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            box-shadow: 0 8px 24px rgba(255, 107, 107, 0.15);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 24px rgba(255, 107, 107, 0.15);
+            }
+            50% {
+                box-shadow: 0 8px 32px rgba(255, 107, 107, 0.25);
+            }
+        }
+
+        .warning-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+            animation: shake 3s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            10%, 30% {
+                transform: rotate(-10deg);
+            }
+            20%, 40% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .warning-text {
+            color: #c92a2a;
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(161, 139, 195, 0.3);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 2px solid var(--border-light);
+            align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: var(--soft-peach);
+            border-radius: 16px;
+            transform: translateX(8px);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-text {
+            color: var(--text-dark);
+            font-size: 16px;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        .info-text strong {
+            color: var(--baby-pink);
+            font-weight: 800;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            display: flex;
+            gap: 20px;
+            padding: 24px 0;
+            position: relative;
+        }
+
+        .step-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 76px;
+            width: 3px;
+            height: calc(100% - 52px);
+            background: linear-gradient(180deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 2px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 20px;
+            flex-shrink: 0;
+            z-index: 1;
+            box-shadow: 0 8px 16px rgba(161, 139, 195, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .step-item:hover .step-number {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .step-number::before {
+            content: counter(step-counter);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+
+        .step-title {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .difficulty-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--warm-beige), var(--calm-sky));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 32px;
+            box-shadow: 0 6px 16px rgba(219, 141, 184, 0.3);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 3px solid var(--border-light);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--baby-pink);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--calm-sky);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        .footer-link:hover {
+            color: var(--calm-sky);
+        }
+
+        .footer-icon {
+            font-size: 18px;
+        }
+
+        @media (max-width: 640px) {
+            .language-switch {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+            }
+
+            .language-switch a {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .card {
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .section-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .warning-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        .hidden-note {
+            margin-top: 32px;
+            padding: 20px;
+            background: var(--soft-peach);
+            border-radius: 16px;
+            border-left: 4px solid var(--baby-pink);
+            opacity: 0.7;
+        }
+
+        .hidden-note-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .hidden-note-text {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switch -->
+    <div class="language-switch">
+        <a href="account-deletion.html" class="active">EN</a>
+        <a href="account-deletion-tr.html">TR</a>
+    </div>
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <img src="appIcon.png" alt="Babee" class="logo">
+                <h1>Account Deletion Guide</h1>
+                <p class="subtitle">Babee App • Data Security</p>
+            </div>
+
+            <div class="warning-box">
+                <span class="warning-icon">⚠️</span>
+                <div>
+                    <p class="warning-text">
+                        <strong>Warning:</strong> When you delete your account, all your baby information, health records, and personal data will be permanently deleted. This action is irreversible and you will no longer be able to access your data.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <span class="difficulty-badge">
+                    🔒 Secure Deletion Process • 3-Step Verification
+                </span>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span class="section-icon">🗑️</span>
+                    Data to be Permanently Deleted
+                </h2>
+                <ul class="info-list">
+                    <li class="info-item">
+                        <span class="check-icon">❌</span>
+                        <span class="info-text">
+                            <strong>Baby Profiles:</strong> All baby information, birth dates, gender information, and personal notes
+                        </span>
+                    </li>
+                    <li class="info-item">
+                        <span class="check-icon">❌</span>
+                        <span class="info-text">
+                            <strong>Health Records:</strong> Sleep tracking, feeding history, development data, health notes, and reports
+                        </span>
+                    </li>
+                    <li class="info-item">
+                        <span class="check-icon">❌</span>
+                        <span class="info-text">
+                            <strong>Account Information:</strong> Email address, password, authentication information, and session history
+                        </span>
+                    </li>
+                    <li class="info-item">
+                        <span class="check-icon">❌</span>
+                        <span class="info-text">
+                            <strong>App Data:</strong> All preferences, settings, notification history, and user customizations
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span class="section-icon">📱</span>
+                    In-App Account Deletion
+                </h2>
+                <p style="color: var(--text-light); font-size: 15px; margin-bottom: 24px; font-weight: 600; line-height: 1.7;">
+                    Babee app allows you to delete your account <strong style="color: var(--baby-pink);">directly from within the app</strong>. 
+                    A 3-step verification process is applied for your security.
+                </p>
+                <ol class="step-list">
+                    <li class="step-item">
+                        <div class="step-number"></div>
+                        <div class="step-content">
+                            <div class="step-title">🔐 Access Profile Settings</div>
+                            <div class="step-description">
+                                Open the app and sign in to your account. Navigate to "Profile" or "Settings" from the main menu. Find the hidden settings section at the bottom of the page (three dots "•••" icon).
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number"></div>
+                        <div class="step-content">
+                            <div class="step-title">⏱️ First Verification - Waiting Period</div>
+                            <div class="step-description">
+                                When you start the account deletion process, you will first see a warning screen showing all the data to be deleted. You will need to <strong>wait for 10 seconds</strong> to continue. This time is provided for you to reconsider your decision.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number"></div>
+                        <div class="step-content">
+                            <div class="step-title">✍️ Second Verification - Text Confirmation</div>
+                            <div class="step-description">
+                                After the waiting period, you will be asked to type the word <strong>"DELETE"</strong> exactly to confirm that you want to continue. This prevents accidental deletion.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number"></div>
+                        <div class="step-content">
+                            <div class="step-title">👤 Final Verification - Your Name</div>
+                            <div class="step-description">
+                                Finally, to complete the process, you will need to type <strong>your own name (mother's name)</strong> exactly. When your name matches correctly, the "Delete Account" button will become active.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number"></div>
+                        <div class="step-content">
+                            <div class="step-title">🔥 Instant Deletion Process</div>
+                            <div class="step-description">
+                                After completing all verification steps, press the "Delete Account" button. Your account and all your data will be deleted <strong>instantly and irreversibly</strong>. You will be automatically logged out of the app.
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span class="section-icon">⏱️</span>
+                    Processing Time and Details
+                </h2>
+                <ul class="info-list">
+                    <li class="info-item">
+                        <span class="check-icon">⚡</span>
+                        <span class="info-text">
+                            <strong>Instant Process:</strong> After completing all verification steps, the account deletion process occurs immediately. There is no waiting period.
+                        </span>
+                    </li>
+                    <li class="info-item">
+                        <span class="check-icon">🔒</span>
+                        <span class="info-text">
+                            <strong>Permanent Deletion:</strong> Your data is completely deleted from our servers. It cannot be kept in backup systems. Fully compliant with GDPR and data protection laws.
+                        </span>
+                    </li>
+                    <li class="info-item">
+                        <span class="check-icon">❌</span>
+                        <span class="info-text">
+                            <strong>Irreversible:</strong> After the deletion process is complete, your data cannot be accessed in any way. Even if you register again, your old data will not be restored.
+                        </span>
+                    </li>
+                    <li class="info-item">
+                        <span class="check-icon">🛡️</span>
+                        <span class="info-text">
+                            <strong>Security:</strong> The deletion process can only be performed by the logged-in user. If a long time has passed since the last login, you may be asked to log in again for security reasons.
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="hidden-note">
+                <div class="hidden-note-title">💡 Why So Many Steps?</div>
+                <p class="hidden-note-text">
+                    Since account deletion is irreversible, a multi-step security process is implemented to prevent you from accidentally or impulsively deleting your account. Each step is designed to ensure you are certain of your decision.
+                </p>
+            </div>
+
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="https://github.com/onimaskesi/babee-privacy" class="footer-link">
+                        <span class="footer-icon">🔒</span>
+                        Privacy Policy
+                    </a>
+                    <a href="mailto:babeeapp@gmail.com" class="footer-link">
+                        <span class="footer-icon">📧</span>
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
