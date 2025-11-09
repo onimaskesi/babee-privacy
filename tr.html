@@ -10,247 +10,692 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --soft-peach: #ebe2fc;
+            --gentle-coral: #deb9da;
+            --baby-pink: #a18bc3;
+            --warm-beige: #fbd1d5;
+            --calm-sky: #db8db8;
+            --text-dark: #4a3f6e;
+            --text-light: #8a82a6;
+            --border-light: #ded9e6;
+            --card-bg: #ffffff;
+            --error: #ff6b6b;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #E8D5F2 0%, #B39DDB 100%);
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            min-height: 100vh;
             padding: 20px;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
         }
-        
+
+        /* Animated Background Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--baby-pink);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--calm-sky);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+
+        .bg-shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--warm-beige);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 60px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-30px, 30px) rotate(270deg);
+            }
+        }
+
+        /* Sparkles Animation */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .sparkle-1 {
+            top: 15%;
+            left: 10%;
+            font-size: 20px;
+            animation-delay: 0s;
+        }
+
+        .sparkle-2 {
+            top: 25%;
+            right: 15%;
+            font-size: 16px;
+            animation-delay: 1s;
+        }
+
+        .sparkle-3 {
+            top: 60%;
+            left: 8%;
+            font-size: 18px;
+            animation-delay: 2s;
+        }
+
+        .sparkle-4 {
+            top: 70%;
+            right: 12%;
+            font-size: 14px;
+            animation-delay: 0.5s;
+        }
+
+        .sparkle-5 {
+            top: 40%;
+            left: 85%;
+            font-size: 22px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1.2);
+            }
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+        }
+
+        .language-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switch a.active {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+        }
+
+        .language-switch a:not(.active):hover {
+            background: var(--soft-peach);
+        }
+
         .container {
             max-width: 900px;
-            margin: 40px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
         }
-        
-        header {
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 48px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-light);
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card Sparkles */
+        .card-sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: cardSparkle 4s infinite ease-in-out;
+        }
+
+        .card-sparkle-1 {
+            top: 20px;
+            right: 30px;
+            font-size: 16px;
+            animation-delay: 0s;
+        }
+
+        .card-sparkle-2 {
+            top: 50%;
+            left: 20px;
+            font-size: 12px;
+            animation-delay: 1.5s;
+        }
+
+        .card-sparkle-3 {
+            bottom: 30px;
+            right: 40px;
+            font-size: 14px;
+            animation-delay: 3s;
+        }
+
+        @keyframes cardSparkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.8) rotate(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #9575CD;
+            margin-bottom: 48px;
+            position: relative;
         }
-        
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 12px 32px rgba(161, 139, 195, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         h1 {
-            color: #7E57C2;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
         .update-date {
-            color: #666;
-            font-size: 0.9em;
-            font-style: italic;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+            display: inline-block;
+            background: var(--soft-peach);
+            padding: 8px 16px;
+            border-radius: 12px;
         }
-        
+
+        section {
+            margin-bottom: 40px;
+        }
+
         h2 {
-            color: #7E57C2;
-            font-size: 1.8em;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #E8D5F2;
+            color: var(--text-dark);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--border-light);
         }
-        
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(161, 139, 195, 0.3);
+        }
+
         h3 {
-            color: #9575CD;
-            font-size: 1.3em;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            color: var(--baby-pink);
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
         }
-        
+
         p {
-            margin-bottom: 15px;
-            text-align: justify;
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
         }
-        
-        ul, ol {
-            margin-left: 30px;
-            margin-bottom: 15px;
+
+        ul {
+            margin-left: 0;
+            margin-bottom: 20px;
+            list-style: none;
         }
-        
+
         li {
-            margin-bottom: 10px;
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
         }
-        
+
+        li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        strong {
+            color: var(--baby-pink);
+            font-weight: 800;
+        }
+
         .highlight {
-            background: #F3E5F5;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #9575CD;
-            margin: 20px 0;
+            background: linear-gradient(135deg, rgba(161, 139, 195, 0.1), rgba(219, 141, 184, 0.1));
+            padding: 24px;
+            border-radius: 20px;
+            border-left: 5px solid var(--baby-pink);
+            margin: 24px 0;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(161, 139, 195, 0.1);
         }
-        
+
+        .highlight::before {
+            content: "✨";
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 24px;
+            animation: sparkleFloat 2s infinite ease-in-out;
+        }
+
         .contact-box {
-            background: linear-gradient(135deg, #7E57C2 0%, #9575CD 100%);
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
             color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 48px;
+            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.4);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .contact-box::before,
+        .contact-box::after {
+            content: "✨";
+            position: absolute;
+            font-size: 32px;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .contact-box::before {
+            top: 20px;
+            right: 30px;
+            animation-delay: 0s;
+        }
+
+        .contact-box::after {
+            bottom: 20px;
+            left: 30px;
+            animation-delay: 1.5s;
+        }
+
         .contact-box h2 {
             color: white;
             border: none;
             margin-top: 0;
+            padding-bottom: 0;
         }
-        
+
+        .contact-box ul {
+            margin-left: 0;
+        }
+
+        .contact-box li {
+            padding-left: 36px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        .contact-box li::before {
+            content: "📧";
+            font-size: 20px;
+        }
+
         .contact-box a {
             color: #FFD54F;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 800;
+            transition: all 0.3s ease;
         }
-        
+
+        .contact-box a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #E8D5F2;
-            color: #666;
-            font-size: 0.9em;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 3px solid var(--border-light);
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 700;
         }
-        
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 16px rgba(161, 139, 195, 0.3);
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 30px 20px;
+                padding-top: 20px;
             }
-            
+
+            .card {
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
             h1 {
-                font-size: 2em;
+                font-size: 28px;
             }
-            
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
             h2 {
-                font-size: 1.5em;
+                font-size: 20px;
+            }
+
+            .section-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .language-switch {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+            }
+
+            .language-switch a {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .sparkle {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🍼 Babee</h1>
-            <h2 style="border: none; color: #9575CD;">Gizlilik Politikası</h2>
-            <p class="update-date">Son Güncelleme: 5 Kasım 2025</p>
-        </header>
-
-        <section>
-            <p>Babee uygulamasını kullandığınız için teşekkür ederiz. Bu gizlilik politikası, kişisel bilgilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu açıklar.</p>
-        </section>
-
-        <section>
-            <h2>1. Toplanan Bilgiler</h2>
-            
-            <h3>1.1 Kullanıcı Tarafından Sağlanan Bilgiler</h3>
-            <ul>
-                <li><strong>Anne Bilgileri:</strong> İsim, e-posta adresi</li>
-                <li><strong>Bebek Bilgileri:</strong> İsim, doğum tarihi, cinsiyet, gestasyonel yaş</li>
-                <li><strong>Sağlık Bilgileri:</strong> Uyku sorunları, beslenme tipi, emzirme durumu, ruh hali (ölçekli değerlendirmeler)</li>
-                <li><strong>Ek Notlar:</strong> Kullanıcının eklediği sağlık notları</li>
-            </ul>
-
-            <h3>1.2 Otomatik Olarak Toplanan Bilgiler</h3>
-            <ul>
-                <li><strong>Cihaz Bilgileri:</strong> Cihaz modeli, işletim sistemi versiyonu</li>
-                <li><strong>Kullanım Verileri:</strong> Uygulama kullanım sıklığı, özellik kullanımı</li>
-                <li><strong>Çökme Raporları:</strong> Uygulama hatalarını düzeltmek için anonim çökme verileri</li>
-            </ul>
-
-            <h3>1.3 Üçüncü Taraf Servisleri</h3>
-            <ul>
-                <li><strong>Firebase Authentication:</strong> Giriş ve kimlik doğrulama</li>
-                <li><strong>Firebase Firestore:</strong> Veri depolama</li>
-                <li><strong>Google Sign-In / Apple Sign-In:</strong> Sosyal medya girişi</li>
-                <li><strong>RevenueCat:</strong> Abonelik yönetimi</li>
-                <li><strong>AI Servisleri (Gemini, Groq, Hugging Face):</strong> Kişiselleştirilmiş öneriler oluşturma</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>2. Bilgilerin Kullanımı</h2>
-            <p>Topladığımız bilgileri şu amaçlarla kullanırız:</p>
-            <ul>
-                <li>✅ Kişiselleştirilmiş tavsiyeler ve günlük ipuçları sunmak</li>
-                <li>✅ Bebeğinizin gelişim aşamasına uygun içerik oluşturmak</li>
-                <li>✅ Uygulama performansını iyileştirmek</li>
-                <li>✅ Kullanıcı desteği sağlamak</li>
-                <li>✅ Abonelik ve ödeme işlemlerini yönetmek</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>3. Veri Güvenliği</h2>
-            <div class="highlight">
-                <p>Verilerinizi korumak için şu önlemleri alıyoruz:</p>
-                <ul>
-                    <li>🔒 <strong>Firebase Security Rules:</strong> Veritabanı erişim kontrolü</li>
-                    <li>🔐 <strong>HTTPS Şifreleme:</strong> Tüm veri iletişimi şifreli</li>
-                    <li>🛡️ <strong>Kimlik Doğrulama:</strong> Sadece yetkili kullanıcılar verilerine erişebilir</li>
-                    <li>🔑 <strong>Şifreli Depolama:</strong> Firebase Firestore güvenli altyapısı</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2>4. Veri Paylaşımı</h2>
-            <p>Kişisel bilgilerinizi üçüncü taraflarla <strong>PAYLAŞMAYIZ</strong>, aşağıdaki istisnalar hariç:</p>
-            <ul>
-                <li><strong>Yasal Zorunluluk:</strong> Mahkeme kararı veya yasal süreçler</li>
-                <li><strong>Hizmet Sağlayıcılar:</strong> Firebase, RevenueCat gibi altyapı sağlayıcılar (yalnızca gerekli bilgiler)</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>5. Çocuk Gizliliği</h2>
-            <p>Uygulamamız 18 yaş üstü ebeveynler içindir. 13 yaş altı çocuklardan bilerek veri toplamayız.</p>
-        </section>
-
-        <section>
-            <h2>6. Kullanıcı Hakları</h2>
-            <p>Aşağıdaki haklara sahipsiniz:</p>
-            <ul>
-                <li>✅ <strong>Erişim Hakkı:</strong> Verilerinizi görüntüleme</li>
-                <li>✅ <strong>Düzenleme Hakkı:</strong> Profil bilgilerinizi güncelleme</li>
-                <li>✅ <strong>Silme Hakkı:</strong> Hesabınızı ve tüm verilerinizi silme</li>
-                <li>✅ <strong>İtiraz Hakkı:</strong> Veri işlemeye itiraz etme</li>
-            </ul>
-            <p><strong>Hesap silme:</strong> Profil → Ayarlar → Hesabı Sil</p>
-        </section>
-
-        <section>
-            <h2>7. Bildirimler</h2>
-            <p>Premium kullanıcılar için:</p>
-            <ul>
-                <li>📱 <strong>Push Bildirimleri:</strong> Günlük motivasyon ve öneriler</li>
-                <li>⚙️ <strong>Kontrol:</strong> Bildirimler istediğiniz zaman devre dışı bırakılabilir</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>8. Üçüncü Taraf Bağlantılar</h2>
-            <p>Uygulamamız üçüncü taraf web sitelerine bağlantılar içerebilir. Bu sitelerin gizlilik politikalarından sorumlu değiliz.</p>
-        </section>
-
-        <section>
-            <h2>9. Politika Değişiklikleri</h2>
-            <p>Bu politikayı zaman zaman güncelleyebiliriz. Değişiklikler bu sayfada yayınlanacaktır.</p>
-        </section>
-
-        <div class="contact-box">
-            <h2>10. İletişim</h2>
-            <p>Sorularınız için:</p>
-            <ul style="list-style: none; margin-left: 0;">
-                <li>📧 <strong>E-posta:</strong> <a href="mailto:privacy@babeeapp.com">privacy@babeeapp.com</a></li>
-                <li>📱 <strong>Destek:</strong> Uygulama içi "İletişim" bölümü</li>
-            </ul>
-        </div>
-
-        <footer>
-            <p><strong>© 2025 Babee. Tüm hakları saklıdır.</strong></p>
-        </footer>
+    <!-- Language Switch -->
+    <div class="language-switch">
+        <a href="index.html">EN</a>
+        <a href="tr.html" class="active">TR</a>
     </div>
-</body>
-</html>
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <!-- Floating Sparkles -->
+    <div class="sparkle sparkle-1">✨</div>
+    <div class="sparkle sparkle-2">⭐</div>
+    <div class="sparkle sparkle-3">✨</div>
+    <div class="sparkle sparkle-4">💫</div>
+    <div class="sparkle sparkle-5">⭐</div>
+
+    <div class="container">
+        <div class="card">
+            <!-- Card Sparkles -->
+            <div class="card-sparkle card-sparkle-1">✨</div>
+            <div class="card-sparkle card-sparkle-2">⭐</div>
+            <div class="card-sparkle card-sparkle-3">💫</div>
+
+            <div class="header">
+                <img src="appIcon.png" alt="Babee" class="logo">
+                <h1>Gizlilik Politikası</h1>
+                <p class="subtitle">Babee Uygulaması • Verileriniz, Kontrolünüz Altında</p>
+                <span class="update-date">📅 Son Güncelleme: 9 Kasım 2025</span>
+            </div>
+
+            <section>
+                <p style="font-size: 16px; font-weight: 600; line-height: 1.9;">
+                    Babee uygulamasını kullandığınız için teşekkür ederiz. Bu gizlilik politikası, kişisel bilgilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu açıklar. Gizliliğiniz ve bebeğinizin güvenliği bizim en önemli önceliklerimizdir.
+                </p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">📋</span>
+                    Topladığımız Bilgiler
+                </h2>
+                
+                <h3>1.1 Kullanıcı Tarafından Sağlanan Bilgiler</h3>
+                <ul>
+                    <li><strong>Anne Bilgileri:</strong> Hesap oluşturma ve iletişim için ad, e-posta adresi</li>
+                    <li><strong>Bebek Bilgileri:</strong> Kişiselleştirilmiş bakım ipuçları sağlamak için ad, doğum tarihi, cinsiyet, gebelik yaşı</li>
+                    <li><strong>Sağlık Bilgileri:</strong> Uyku düzeni, beslenme tercihleri (emzirme, mama, karma), emzirme durumu, ruh hali değerlendirmeleri</li>
+                    <li><strong>Ek Notlar:</strong> Bizimle paylaşmayı seçtiğiniz sağlık notları veya özel endişeler</li>
+                </ul>
+
+                <h3>1.2 Otomatik Olarak Toplanan Bilgiler</h3>
+                <ul>
+                    <li><strong>Cihaz Bilgileri:</strong> Cihaz modeli, işletim sistemi sürümü ve benzersiz cihaz tanımlayıcıları</li>
+                    <li><strong>Kullanım Verileri:</strong> Uygulama etkileşim kalıpları, özellik kullanım sıklığı ve oturum süresi</li>
+                    <li><strong>Çökme Raporları:</strong> Uygulama kararlılığını ve performansını iyileştirmemize yardımcı olmak için anonim hata günlükleri</li>
+                </ul>
+
+                <h3>1.3 Üçüncü Taraf Hizmetleri</h3>
+                <ul>
+                    <li><strong>Firebase Authentication:</strong> Güvenli giriş ve kullanıcı kimlik doğrulama</li>
+                    <li><strong>Firebase Firestore:</strong> Şifrelenmiş bulut veri depolama</li>
+                    <li><strong>Google Sign-In / Apple Sign-In:</strong> İsteğe bağlı sosyal kimlik doğrulama yöntemleri</li>
+                    <li><strong>RevenueCat:</strong> Abonelik ve ödeme yönetimi</li>
+                    <li><strong>AI Hizmetleri (Gemini, Groq):</strong> Kişiselleştirilmiş bebek bakımı önerileri oluşturma</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🎯</span>
+                    Bilgilerinizi Nasıl Kullanıyoruz
+                </h2>
+                <div class="info-badge">
+                    🔒 Verileriniz Kişiselleştirilmiş Bakımı Güçlendirir
+                </div>
+                <p>Toplanan bilgileri aşağıdaki amaçlar için kullanıyoruz:</p>
+                <ul>
+                    <li><strong>Kişiselleştirilmiş Tavsiyeler:</strong> Bebeğinizin yaşına ve gelişim evresine özel günlük ipuçları ve öneriler oluşturma</li>
+                    <li><strong>Akıllı İçerik:</strong> Beslenme tercihleriniz, uyku düzeniniz ve özel endişelerinize dayalı ilgili içerik üretme</li>
+                    <li><strong>Uygulama İyileştirme:</strong> Özellikleri ve kullanıcı deneyimini geliştirmek için kullanım kalıplarını analiz etme</li>
+                    <li><strong>Müşteri Desteği:</strong> Sorularınızı yanıtlama ve teknik sorunları çözme</li>
+                    <li><strong>Abonelik Yönetimi:</strong> Ödemeleri işleme ve premium üyeliğinizi yönetme</li>
+                    <li><strong>Akıllı Bildirimler:</strong> Zamanında hatırlatıcılar ve faydalı ipuçları gönderme (Premium özellik, istediğiniz zaman devre dışı bırakılabilir)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🔒</span>
+                    Veri Güvenliği
+                </h2>
+                <div class="highlight">
+                    <p style="font-weight: 700; margin-bottom: 20px;">Verilerinizi korumak için kapsamlı önlemler alıyoruz:</p>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Firebase Güvenlik Kuralları:</strong> Yalnızca sizin verilerinize erişebilmenizi sağlayan katı veritabanı erişim kontrolleri</li>
+                        <li><strong>HTTPS Şifreleme:</strong> Cihazınız ve sunucularımız arasında iletilen tüm veriler endüstri standardı SSL/TLS protokolleri kullanılarak şifrelenir</li>
+                        <li><strong>Kimlik Doğrulama:</strong> Çok faktörlü kimlik doğrulama desteği ve güvenli token tabanlı oturum yönetimi</li>
+                        <li><strong>Şifrelenmiş Depolama:</strong> Verileriniz Firebase Firestore'un güvenli, şifrelenmiş altyapısında saklanır</li>
+                        <li><strong>Düzenli Güvenlik Denetimleri:</strong> Güvenlik önlemlerimizi sürekli olarak izliyor ve güncelliyoruz</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🤝</span>
+                    Veri Paylaşımı
+                </h2>
+                <div class="info-badge">
+                    🛡️ Verilerinizi Asla Satmıyoruz
+                </div>
+                <p style="font-weight: 700; font-size: 16px;">Kişisel bilgilerinizi üçüncü taraflarla <strong style="font-size: 18px;">PAYLAŞMIYORUZ</strong>, bu sınırlı durumlar haricinde:</p>
+                <ul>
+                    <li><strong>Yasal Gereklilikler:</strong> Yasa, mahkeme kararları veya yasal süreçler tarafından gerektiğinde</li>
+                    <li><strong>Hizmet Sağlayıcılar:</strong> Uygulamayı çalıştırmamıza yardımcı olan temel altyapı sağlayıcıları (Firebase, RevenueCat) - yalnızca minimum gerekli bilgileri alırlar ve katı gizlilik anlaşmalarıyla bağlıdırlar</li>
+                    <li><strong>Onayınız ile:</strong> Verilerinizi başka bir nedenle paylaşmamız gerekirse, önce açık izninizi her zaman isteriz</li>
+                </ul>
+                <p style="font-weight: 600; color: var(--baby-pink);">Güveniniz bizim önceliğimizdir. Kişisel bilgilerinizi reklamcılara veya pazarlamacılara asla satmayacağız, kiralamayacağız veya takas etmeyeceğiz.</p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">👶</span>
+                    Çocukların Gizliliği
+                </h2>
+                <p>Uygulamamız 18 yaş üstü ebeveynler ve bakıcılar için tasarlanmıştır. Uygulama bebeğinizin bakımına yardımcı olsa da, 13 yaş altındaki çocuklardan bilerek doğrudan kişisel bilgi toplamıyoruz. Tüm veriler ebeveynler/vasiler tarafından yalnızca bakım amaçlı olarak bebekleri hakkında sağlanır.</p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">⚖️</span>
+                    Haklarınız
+                </h2>
+                <div class="info-badge">
+                    💪 Tam Kontrole Sahipsiniz
+                </div>
+                <p>Verilerinizle ilgili aşağıdaki haklara sahipsiniz:</p>
+                <ul>
+                    <li><strong>Erişim Hakkı:</strong> Sizin ve bebeğiniz hakkında sakladığımız tüm verileri görüntüleme</li>
+                    <li><strong>Düzenleme Hakkı:</strong> Profil bilgilerinizi, bebek ayrıntılarınızı ve tercihlerinizi istediğiniz zaman güncelleme</li>
+                    <li><strong>Silme Hakkı:</strong> Güvenli 3 adımlı doğrulama sürecimiz aracılığıyla hesabınızı ve tüm ilgili verileri kalıcı olarak silme</li>
+                    <li><strong>İtiraz Hakkı:</strong> Bildirimler ve analizler dahil olmak üzere belirli veri işleme faaliyetlerinden çıkma</li>
+                    <li><strong>Taşınabilirlik Hakkı:</strong> Verilerinizin taşınabilir bir formatta bir kopyasını talep etme</li>
+                    <li><strong>Onayı Geri Çekme Hakkı:</strong> Veri işleme izinleri hakkında istediğiniz zaman fikrinizi değiştirme</li>
+                </ul>
+                <p style="font-weight: 700; background: var(--soft-peach); padding: 16px; border-radius: 12px; margin-top: 20px;">
+                    <strong style="color: var(--baby-pink);">Hesap Silme:</strong> Profil → Ayarlar → Gizli Ayarlar (•••) → Hesabı Sil. 
+                    Daha fazla bilgi için <a href="account-deletion-tr.html" style="color: var(--calm-sky); text-decoration: underline;">Hesap Silme Rehberimize</a> göz atın
+                </p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🔔</span>
+                    Bildirimler ve İletişim
+                </h2>
+                <p>Premium kullanıcılar için, ebeveynlik deneyiminizi geliştirmek üzere akıllı bildirimler sunuyoruz:</p>
+                <ul>
+                    <li><strong>Anlık Bildirimler:</strong> AI tarafından oluşturulan günlük ipuçları, aktivite önerileri, bağ kurma anları, kendine bakım hatırlatıcıları, beslenme ipuçları, uyku tavsiyeleri ve akşam düşünceleri (7 kategori)</li>
+                    <li><strong>E-posta İletişimi:</strong> Önemli hesap güncellemeleri, abonelik bilgileri ve isteğe bağlı haber bültenleri</li>
+                    <li><strong>Tam Kontrol:</strong> Tüm bildirimler cihaz ayarlarınızdan veya uygulama tercihlerinizden istediğiniz zaman yönetilebilir veya devre dışı bırakılabilir</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🔗</span>
+                    Üçüncü Taraf Bağlantıları
+                </h2>
+                <p>Uygulamamız ek kaynaklar için üçüncü taraf web sitelerine veya hizmetlere bağlantılar içerebilir. Lütfen bu harici sitelerin gizlilik uygulamalarından sorumlu olmadığımızı unutmayın.
