@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Babee Uygulama Desteği - Yapay zeka destekli bebek bakım asistanınızla ilgili yardım alın">
+    <title>Babee Destek | Yardım Merkezi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --soft-peach: #ebe2fc;
+            --gentle-coral: #deb9da;
+            --baby-pink: #a18bc3;
+            --warm-beige: #fbd1d5;
+            --calm-sky: #db8db8;
+            --text-dark: #4a3f6e;
+            --text-light: #8a82a6;
+            --border-light: #ded9e6;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--baby-pink);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--calm-sky);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+
+        .bg-shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--warm-beige);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, 30px) rotate(90deg); }
+            50% { transform: translate(0, 60px) rotate(180deg); }
+            75% { transform: translate(-30px, 30px) rotate(270deg); }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .sparkle-1 { top: 15%; left: 10%; font-size: 20px; animation-delay: 0s; }
+        .sparkle-2 { top: 25%; right: 15%; font-size: 16px; animation-delay: 1s; }
+        .sparkle-3 { top: 60%; left: 8%; font-size: 18px; animation-delay: 2s; }
+        .sparkle-4 { top: 70%; right: 12%; font-size: 14px; animation-delay: 0.5s; }
+        .sparkle-5 { top: 40%; left: 85%; font-size: 22px; animation-delay: 1.5s; }
+
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0.3; transform: translateY(0) scale(1); }
+            50% { opacity: 1; transform: translateY(-20px) scale(1.2); }
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+        }
+
+        .language-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switch a.active {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+        }
+
+        .language-switch a:not(.active):hover {
+            background: var(--soft-peach);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 48px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-light);
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: cardSparkle 4s infinite ease-in-out;
+        }
+
+        .card-sparkle-1 { top: 20px; right: 30px; font-size: 16px; animation-delay: 0s; }
+        .card-sparkle-2 { top: 50%; left: 20px; font-size: 12px; animation-delay: 1.5s; }
+        .card-sparkle-3 { bottom: 30px; right: 40px; font-size: 14px; animation-delay: 3s; }
+
+        @keyframes cardSparkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.2) rotate(180deg); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 12px 32px rgba(161, 139, 195, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--border-light);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(161, 139, 195, 0.3);
+        }
+
+        h3 {
+            color: var(--baby-pink);
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        ul {
+            margin-left: 0;
+            margin-bottom: 20px;
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        strong {
+            color: var(--baby-pink);
+            font-weight: 800;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, rgba(161, 139, 195, 0.05), rgba(219, 141, 184, 0.05));
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            border-left: 5px solid var(--baby-pink);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(161, 139, 195, 0.15);
+        }
+
+        .faq-question {
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .faq-answer {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 48px;
+            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box::before,
+        .contact-box::after {
+            content: "✨";
+            position: absolute;
+            font-size: 32px;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .contact-box::before { top: 20px; right: 30px; animation-delay: 0s; }
+        .contact-box::after { bottom: 20px; left: 30px; animation-delay: 1.5s; }
+
+        .contact-box h2 {
+            color: white;
+            border: none;
+            margin-top: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-box p {
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        .contact-box a {
+            color: #FFD54F;
+            text-decoration: none;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .email-link {
+            display: inline-block;
+            background: white;
+            color: var(--baby-pink);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: transform 0.2s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .email-link:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 3px solid var(--border-light);
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding-top: 20px; }
+            .card { padding: 32px 24px; border-radius: 24px; }
+            h1 { font-size: 28px; }
+            .logo { width: 100px; height: 100px; }
+            h2 { font-size: 20px; }
+            .section-icon { width: 40px; height: 40px; font-size: 20px; }
+            .language-switch { top: 10px; right: 10px; padding: 6px; }
+            .language-switch a { padding: 8px 16px; font-size: 13px; }
+            .sparkle { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="support.html">EN</a>
+        <a href="support-tr.html" class="active">TR</a>
+    </div>
+
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="sparkle sparkle-1">✨</div>
+    <div class="sparkle sparkle-2">⭐</div>
+    <div class="sparkle sparkle-3">✨</div>
+    <div class="sparkle sparkle-4">💫</div>
+    <div class="sparkle sparkle-5">⭐</div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-sparkle card-sparkle-1">✨</div>
+            <div class="card-sparkle card-sparkle-2">⭐</div>
+            <div class="card-sparkle card-sparkle-3">💫</div>
+
+            <div class="header">
+                <img src="appIcon.png" alt="Babee" class="logo">
+                <h1>Destek Merkezi</h1>
+                <p class="subtitle">Babee Uygulaması • Yardım İçin Buradayız</p>
+            </div>
+
+            <section>
+                <h2>
+                    <span class="section-icon">📱</span>
+                    Babee Hakkında
+                </h2>
+                <p style="font-size: 16px; font-weight: 600; line-height: 1.9;">
+                    Babee, bebeğinizin gelişim aşamasına özel kişiselleştirilmiş tavsiyeler, 7/24 destek ve akıllı bildirimler sunan yapay zeka destekli ebeveynlik yardımcınızdır.
+                </p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">❓</span>
+                    Sıkça Sorulan Sorular
+                </h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Babee içeriği nasıl kişiselleştiriyor?</div>
+                    <div class="faq-answer">Babee, bebeğinizin yaşı, beslenme türü, uyku düzeni ve özel endişeleriniz hakkındaki bilgileri kullanarak yapay zeka teknolojisiyle kişiselleştirilmiş ipuçları ve tavsiyeler üretir.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Ücretsiz sürümde neler var?</div>
+                    <div class="faq-answer">Ücretsiz kullanıcılar günlük karşılama mesajları, günde 3 ipucu, günde 2 AI sohbet mesajı ve günde 1 içerik yenileme hakkı alır.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Premium ile ne elde ediyorum?</div>
+                    <div class="faq-answer">Premium sınırsız AI sohbet (sesli ve görüntülü), sınırsız ipucu yenileme, akıllı bildirimler (7 kategori), çoklu bebek profilleri ve öncelikli destek içerir.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Akıllı Bildirimler nasıl çalışır?</div>
+                    <div class="faq-answer">Akıllı Bildirimler, günün farklı saatlerinde gönderilen AI tarafından oluşturulan mesajlardır. Sabah motivasyonu, aktivite önerileri, beslenme ipuçları, uyku tavsiyeleri ve daha fazlasını içerir. Etkinleştirildiğinde günlük 2-4 bildirim alırsınız.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Birden fazla bebek takip edebilir miyim?</div>
+                    <div class="faq-answer">Evet! Premium üyeler sınırsız bebek profili oluşturabilir ve her çocuk için kişiselleştirilmiş içerik almak üzere aralarında kolayca geçiş yapabilir.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Verilerim güvende mi?</div>
+                    <div class="faq-answer">Kesinlikle. Tüm verileriniz şifrelenir ve güvenli bir şekilde saklanır. GDPR uyumluyuz ve bilgilerinizi asla üçüncü taraflarla paylaşmıyoruz. Hesabınızı istediğiniz zaman silebilirsiniz.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Aboneliğimi nasıl iptal edebilirim?</div>
+                    <div class="faq-answer">Aboneliğinizi App Store Hesap Ayarlarınızdan istediğiniz zaman yönetebilir veya iptal edebilirsiniz. Ücretlendirilmemek için yenilemeden en az 24 saat önce iptal edin.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Babee hangi dilleri destekliyor?</div>
+                    <div class="faq-answer">Babee Türkçe, İngilizce, Almanca, Fransızca, İspanyolca, Portekizce, Rusça, Japonca, Korece, Çince, Hintçe, Arapça ve daha birçok olmak üzere 23 dili destekler.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Premium satın alımımı nasıl geri yüklerim?</div>
+                    <div class="faq-answer">Profil → Premium → "Satın Alımları Geri Yükle" butonuna gidin. Bu, uygulamayı yeniden yüklediyseniz veya cihaz değiştirdiyseniz aboneliğinizi geri yükler.</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🛠️</span>
+                    Sorun Giderme
+                </h2>
+                
+                <h3>Uygulama yüklenmiyor mu?</h3>
+                <ul>
+                    <li>İnternet bağlantınızı kontrol edin</li>
+                    <li>iOS 14.0 veya üzeri çalıştırdığınızdan emin olun</li>
+                    <li>Uygulamayı zorla kapatıp yeniden açmayı deneyin</li>
+                    <li>Cihazınızı yeniden başlatın</li>
+                </ul>
+
+                <h3>Bildirimler çalışmıyor mu?</h3>
+                <ul>
+                    <li>iPhone Ayarları → Babee → Bildirimler'e gidin</li>
+                    <li>"Bildirimlere İzin Ver" seçeneğinin etkin olduğundan emin olun</li>
+                    <li>Babee uygulama ayarlarında bildirimleri etkinleştirin</li>
+                    <li>Rahatsız Etmeyin modunun kapalı olduğunu kontrol edin</li>
+                </ul>
+
+                <h3>Giriş yapamıyor musunuz?</h3>
+                <ul>
+                    <li>Doğru e-posta/şifre kullandığınızdan emin olun</li>
+                    <li>Doğrulama e-postası için spam klasörünüzü kontrol edin</li>
+                    <li>Gerekirse "Şifremi Unuttum" seçeneğini deneyin</li>
+                    <li>Apple/Google oturum açma sorunları için cihaz ayarlarınızı kontrol edin</li>
+                </ul>
+
+                <h3>Satın aldıktan sonra Premium çalışmıyor mu?</h3>
+                <ul>
+                    <li>Satın alma işleminin tamamlanması için birkaç dakika bekleyin</li>
+                    <li>Uygulamayı zorla kapatıp yeniden açın</li>
+                    <li>Premium bölümünde "Satın Alımları Geri Yükle" seçeneğini deneyin</li>
+                    <li>Sorun devam ederse bizimle iletişime geçin</li>
+                </ul>
+            </section>
+
+            <div class="contact-box">
+                <h2>
+                    <span class="section-icon" style="background: rgba(255, 255, 255, 0.25);">📧</span>
+                    Bize Ulaşın
+                </h2>
+                <p style="font-size: 16px; margin-bottom: 24px; line-height: 1.8;">
+                    Yardıma hazırız! Gizlilik politikamız veya verilerinizle ilgili sorularınız, endişeleriniz veya talepleriniz varsa:
+                </p>
+                <a href="mailto:babeeapp@gmail.com" class="email-link">
+                    📧 babeeapp@gmail.com
+                </a>
+                <p style="margin-top: 24px; font-size: 14px; opacity: 0.9;">
+                    Tüm sorulara 48 saat içinde yanıt vermeyi hedefliyoruz. Gizliliğiniz bizim için önemli!
+                </p>
+            </div>
+
+            <footer>
+                <p><strong>© 2025 Babee. Tüm hakları saklıdır.</strong></p>
+                <p style="margin-top: 12px; font-size: 13px; opacity: 0.8;">
+                    Her yerdeki ebeveynler için 💜 ile yapıldı
+                </p>
+                <p style="margin-top: 16px;">
+                    <a href="tr.html" style="color: var(--baby-pink); text-decoration: none; font-weight: 700;">Gizlilik Politikası</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
