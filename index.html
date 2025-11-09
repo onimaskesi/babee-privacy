@@ -10,278 +10,759 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --soft-peach: #ebe2fc;
+            --gentle-coral: #deb9da;
+            --baby-pink: #a18bc3;
+            --warm-beige: #fbd1d5;
+            --calm-sky: #db8db8;
+            --text-dark: #4a3f6e;
+            --text-light: #8a82a6;
+            --border-light: #ded9e6;
+            --card-bg: #ffffff;
+            --error: #ff6b6b;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #E8D5F2 0%, #B39DDB 100%);
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            min-height: 100vh;
             padding: 20px;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+
+        /* Animated Background Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
         }
-        
-        .language-switcher {
-            position: absolute;
+
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--baby-pink);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--calm-sky);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+
+        .bg-shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--warm-beige);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, 30px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 60px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-30px, 30px) rotate(270deg);
+            }
+        }
+
+        /* Sparkles Animation */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .sparkle-1 {
+            top: 15%;
+            left: 10%;
+            font-size: 20px;
+            animation-delay: 0s;
+        }
+
+        .sparkle-2 {
+            top: 25%;
+            right: 15%;
+            font-size: 16px;
+            animation-delay: 1s;
+        }
+
+        .sparkle-3 {
+            top: 60%;
+            left: 8%;
+            font-size: 18px;
+            animation-delay: 2s;
+        }
+
+        .sparkle-4 {
+            top: 70%;
+            right: 12%;
+            font-size: 14px;
+            animation-delay: 0.5s;
+        }
+
+        .sparkle-5 {
+            top: 40%;
+            left: 85%;
+            font-size: 22px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1.2);
+            }
+        }
+
+        .language-switch {
+            position: fixed;
             top: 20px;
             right: 20px;
-            background: white;
+            z-index: 100;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+        }
+
+        .language-switch a {
+            display: inline-block;
             padding: 10px 20px;
-            border-radius: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .language-switcher a {
-            color: #7E57C2;
             text-decoration: none;
-            font-weight: bold;
-            margin: 0 5px;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
         }
-        
-        .language-switcher a:hover {
-            text-decoration: underline;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #9575CD;
-        }
-        
-        h1 {
-            color: #7E57C2;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .update-date {
-            color: #666;
-            font-size: 0.9em;
-            font-style: italic;
-        }
-        
-        h2 {
-            color: #7E57C2;
-            font-size: 1.8em;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #E8D5F2;
-        }
-        
-        h3 {
-            color: #9575CD;
-            font-size: 1.3em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        
-        ul, ol {
-            margin-left: 30px;
-            margin-bottom: 15px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        .highlight {
-            background: #F3E5F5;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #9575CD;
-            margin: 20px 0;
-        }
-        
-        .contact-box {
-            background: linear-gradient(135deg, #7E57C2 0%, #9575CD 100%);
+
+        .language-switch a.active {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
             color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
         }
-        
+
+        .language-switch a:not(.active):hover {
+            background: var(--soft-peach);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 48px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-light);
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card Sparkles */
+        .card-sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: cardSparkle 4s infinite ease-in-out;
+        }
+
+        .card-sparkle-1 {
+            top: 20px;
+            right: 30px;
+            font-size: 16px;
+            animation-delay: 0s;
+        }
+
+        .card-sparkle-2 {
+            top: 50%;
+            left: 20px;
+            font-size: 12px;
+            animation-delay: 1.5s;
+        }
+
+        .card-sparkle-3 {
+            bottom: 30px;
+            right: 40px;
+            font-size: 14px;
+            animation-delay: 3s;
+        }
+
+        @keyframes cardSparkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.8) rotate(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 12px 32px rgba(161, 139, 195, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .update-date {
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+            display: inline-block;
+            background: var(--soft-peach);
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--border-light);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(161, 139, 195, 0.3);
+        }
+
+        h3 {
+            color: var(--baby-pink);
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        ul {
+            margin-left: 0;
+            margin-bottom: 20px;
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        strong {
+            color: var(--baby-pink);
+            font-weight: 800;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(161, 139, 195, 0.1), rgba(219, 141, 184, 0.1));
+            padding: 24px;
+            border-radius: 20px;
+            border-left: 5px solid var(--baby-pink);
+            margin: 24px 0;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(161, 139, 195, 0.1);
+        }
+
+        .highlight::before {
+            content: "✨";
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 24px;
+            animation: sparkleFloat 2s infinite ease-in-out;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 48px;
+            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box::before,
+        .contact-box::after {
+            content: "✨";
+            position: absolute;
+            font-size: 32px;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .contact-box::before {
+            top: 20px;
+            right: 30px;
+            animation-delay: 0s;
+        }
+
+        .contact-box::after {
+            bottom: 20px;
+            left: 30px;
+            animation-delay: 1.5s;
+        }
+
         .contact-box h2 {
             color: white;
             border: none;
             margin-top: 0;
+            padding-bottom: 0;
         }
-        
+
+        .contact-box ul {
+            margin-left: 0;
+        }
+
+        .contact-box li {
+            padding-left: 36px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        .contact-box li::before {
+            content: "📧";
+            font-size: 20px;
+        }
+
+        .contact-box li:last-child::before {
+            content: "💬";
+        }
+
         .contact-box a {
             color: #FFD54F;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 800;
+            transition: all 0.3s ease;
         }
-        
+
+        .contact-box a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #E8D5F2;
-            color: #666;
-            font-size: 0.9em;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 3px solid var(--border-light);
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 700;
         }
-        
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 16px rgba(161, 139, 195, 0.3);
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 30px 20px;
+                padding-top: 20px;
             }
-            
+
+            .card {
+                padding: 32px 24px;
+                border-radius: 24px;
+            }
+
             h1 {
-                font-size: 2em;
+                font-size: 28px;
             }
-            
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
             h2 {
-                font-size: 1.5em;
+                font-size: 20px;
             }
-            
-            .language-switcher {
-                position: static;
-                text-align: center;
-                margin-bottom: 20px;
+
+            .section-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .language-switch {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+            }
+
+            .language-switch a {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .sparkle {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="language-switcher">
-        🌍 <a href="index.html">English</a> | <a href="tr.html">Türkçe</a>
+    <!-- Language Switch -->
+    <div class="language-switch">
+        <a href="index.html" class="active">EN</a>
+        <a href="tr.html">TR</a>
     </div>
-    
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <!-- Floating Sparkles -->
+    <div class="sparkle sparkle-1">✨</div>
+    <div class="sparkle sparkle-2">⭐</div>
+    <div class="sparkle sparkle-3">✨</div>
+    <div class="sparkle sparkle-4">💫</div>
+    <div class="sparkle sparkle-5">⭐</div>
+
     <div class="container">
-        <header>
-            <h1>🍼 Babee</h1>
-            <h2 style="border: none; color: #9575CD;">Privacy Policy</h2>
-            <p class="update-date">Last Updated: November 5, 2025</p>
-        </header>
+        <div class="card">
+            <!-- Card Sparkles -->
+            <div class="card-sparkle card-sparkle-1">✨</div>
+            <div class="card-sparkle card-sparkle-2">⭐</div>
+            <div class="card-sparkle card-sparkle-3">💫</div>
 
-        <section>
-            <p>Thank you for using the Babee application. This privacy policy explains how we collect, use, and protect your personal information.</p>
-        </section>
-
-        <section>
-            <h2>1. Information We Collect</h2>
-            
-            <h3>1.1 User-Provided Information</h3>
-            <ul>
-                <li><strong>Mother's Information:</strong> Name, email address</li>
-                <li><strong>Baby's Information:</strong> Name, date of birth, gender, gestational age</li>
-                <li><strong>Health Information:</strong> Sleep issues, feeding type, breastfeeding status, mood (scale assessments)</li>
-                <li><strong>Additional Notes:</strong> Health notes added by the user</li>
-            </ul>
-
-            <h3>1.2 Automatically Collected Information</h3>
-            <ul>
-                <li><strong>Device Information:</strong> Device model, operating system version</li>
-                <li><strong>Usage Data:</strong> App usage frequency, feature usage</li>
-                <li><strong>Crash Reports:</strong> Anonymous crash data to fix app errors</li>
-            </ul>
-
-            <h3>1.3 Third-Party Services</h3>
-            <ul>
-                <li><strong>Firebase Authentication:</strong> Login and authentication</li>
-                <li><strong>Firebase Firestore:</strong> Data storage</li>
-                <li><strong>Google Sign-In / Apple Sign-In:</strong> Social media login</li>
-                <li><strong>RevenueCat:</strong> Subscription management</li>
-                <li><strong>AI Services (Gemini, Groq, Hugging Face):</strong> Generating personalized recommendations</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>2. How We Use Your Information</h2>
-            <p>We use the collected information for the following purposes:</p>
-            <ul>
-                <li>✅ Providing personalized advice and daily tips</li>
-                <li>✅ Creating content appropriate for your baby's developmental stage</li>
-                <li>✅ Improving app performance</li>
-                <li>✅ Providing user support</li>
-                <li>✅ Managing subscriptions and payment transactions</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>3. Data Security</h2>
-            <div class="highlight">
-                <p>We take the following measures to protect your data:</p>
-                <ul>
-                    <li>🔒 <strong>Firebase Security Rules:</strong> Database access control</li>
-                    <li>🔐 <strong>HTTPS Encryption:</strong> All data communication is encrypted</li>
-                    <li>🛡️ <strong>Authentication:</strong> Only authorized users can access their data</li>
-                    <li>🔑 <strong>Encrypted Storage:</strong> Firebase Firestore secure infrastructure</li>
-                </ul>
+            <div class="header">
+                <img src="appIcon.png" alt="Babee" class="logo">
+                <h1>Privacy Policy</h1>
+                <p class="subtitle">Babee App • Your Data, Your Control</p>
+                <span class="update-date">📅 Last Updated: November 9, 2025</span>
             </div>
-        </section>
 
-        <section>
-            <h2>4. Data Sharing</h2>
-            <p>We <strong>DO NOT SHARE</strong> your personal information with third parties, except in the following cases:</p>
-            <ul>
-                <li><strong>Legal Requirement:</strong> Court orders or legal processes</li>
-                <li><strong>Service Providers:</strong> Infrastructure providers like Firebase, RevenueCat (only necessary information)</li>
-            </ul>
-        </section>
+            <section>
+                <p style="font-size: 16px; font-weight: 600; line-height: 1.9;">
+                    Thank you for using the Babee application. This privacy policy explains how we collect, use, and protect your personal information. Your privacy and your baby's safety are our top priorities.
+                </p>
+            </section>
 
-        <section>
-            <h2>5. Children's Privacy</h2>
-            <p>Our application is for parents over 18 years old. We do not knowingly collect data from children under 13.</p>
-        </section>
+            <section>
+                <h2>
+                    <span class="section-icon">📋</span>
+                    Information We Collect
+                </h2>
+                
+                <h3>1.1 User-Provided Information</h3>
+                <ul>
+                    <li><strong>Mother's Information:</strong> Name, email address for account creation and communication</li>
+                    <li><strong>Baby's Information:</strong> Name, date of birth, gender, gestational age to provide personalized care tips</li>
+                    <li><strong>Health Information:</strong> Sleep patterns, feeding preferences (breastfeeding, formula, mixed), breastfeeding status, mood assessments</li>
+                    <li><strong>Additional Notes:</strong> Any health notes or special concerns you choose to share with us</li>
+                </ul>
 
-        <section>
-            <h2>6. User Rights</h2>
-            <p>You have the following rights:</p>
-            <ul>
-                <li>✅ <strong>Right of Access:</strong> View your data</li>
-                <li>✅ <strong>Right to Edit:</strong> Update your profile information</li>
-                <li>✅ <strong>Right to Delete:</strong> Delete your account and all your data</li>
-                <li>✅ <strong>Right to Object:</strong> Object to data processing</li>
-            </ul>
-            <p><strong>Account deletion:</strong> Profile → Settings → Delete Account</p>
-        </section>
+                <h3>1.2 Automatically Collected Information</h3>
+                <ul>
+                    <li><strong>Device Information:</strong> Device model, operating system version, and unique device identifiers</li>
+                    <li><strong>Usage Data:</strong> App interaction patterns, feature usage frequency, and session duration</li>
+                    <li><strong>Crash Reports:</strong> Anonymous error logs to help us improve app stability and performance</li>
+                </ul>
 
-        <section>
-            <h2>7. Notifications</h2>
-            <p>For premium users:</p>
-            <ul>
-                <li>📱 <strong>Push Notifications:</strong> Daily motivation and recommendations</li>
-                <li>⚙️ <strong>Control:</strong> Notifications can be disabled at any time</li>
-            </ul>
-        </section>
+                <h3>1.3 Third-Party Services</h3>
+                <ul>
+                    <li><strong>Firebase Authentication:</strong> Secure login and user authentication</li>
+                    <li><strong>Firebase Firestore:</strong> Encrypted cloud data storage</li>
+                    <li><strong>Google Sign-In / Apple Sign-In:</strong> Optional social authentication methods</li>
+                    <li><strong>RevenueCat:</strong> Subscription and payment management</li>
+                    <li><strong>AI Services (Gemini, Groq):</strong> Generating personalized baby care recommendations</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>8. Third-Party Links</h2>
-            <p>Our application may contain links to third-party websites. We are not responsible for the privacy policies of these sites.</p>
-        </section>
+            <section>
+                <h2>
+                    <span class="section-icon">🎯</span>
+                    How We Use Your Information
+                </h2>
+                <div class="info-badge">
+                    🔒 Your Data Powers Personalized Care
+                </div>
+                <p>We use the collected information for the following purposes:</p>
+                <ul>
+                    <li><strong>Personalized Advice:</strong> Creating daily tips and recommendations tailored to your baby's age and development stage</li>
+                    <li><strong>Smart Content:</strong> Generating relevant content based on your feeding preferences, sleep patterns, and specific concerns</li>
+                    <li><strong>App Improvement:</strong> Analyzing usage patterns to enhance features and user experience</li>
+                    <li><strong>Customer Support:</strong> Responding to your questions and resolving technical issues</li>
+                    <li><strong>Subscription Management:</strong> Processing payments and managing your premium membership</li>
+                    <li><strong>Smart Notifications:</strong> Sending timely reminders and helpful tips (Premium feature, can be disabled anytime)</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>9. Policy Changes</h2>
-            <p>We may update this policy from time to time. Changes will be posted on this page.</p>
-        </section>
+            <section>
+                <h2>
+                    <span class="section-icon">🔒</span>
+                    Data Security
+                </h2>
+                <div class="highlight">
+                    <p style="font-weight: 700; margin-bottom: 20px;">We take extensive measures to protect your data:</p>
+                    <ul style="margin-bottom: 0;">
+                        <li><strong>Firebase Security Rules:</strong> Strict database access controls ensuring only you can access your data</li>
+                        <li><strong>HTTPS Encryption:</strong> All data transmitted between your device and our servers is encrypted using industry-standard SSL/TLS protocols</li>
+                        <li><strong>Authentication:</strong> Multi-factor authentication support and secure token-based session management</li>
+                        <li><strong>Encrypted Storage:</strong> Your data is stored in Firebase Firestore's secure, encrypted infrastructure</li>
+                        <li><strong>Regular Security Audits:</strong> We continuously monitor and update our security measures</li>
+                    </ul>
+                </div>
+            </section>
 
-        <div class="contact-box">
-            <h2>10. Contact</h2>
-            <p>For your questions:</p>
-            <ul style="list-style: none; margin-left: 0;">
-                <li>📧 <strong>Email:</strong> <a href="mailto:privacy@babeeapp.com">privacy@babeeapp.com</a></li>
-                <li>📱 <strong>Support:</strong> "Contact" section within the app</li>
-            </ul>
+            <section>
+                <h2>
+                    <span class="section-icon">🤝</span>
+                    Data Sharing
+                </h2>
+                <div class="info-badge">
+                    🛡️ We Never Sell Your Data
+                </div>
+                <p style="font-weight: 700; font-size: 16px;">We <strong style="font-size: 18px;">DO NOT SHARE</strong> your personal information with third parties, except in these limited cases:</p>
+                <ul>
+                    <li><strong>Legal Requirements:</strong> When required by law, court orders, or legal processes</li>
+                    <li><strong>Service Providers:</strong> Essential infrastructure providers (Firebase, RevenueCat) who help us operate the app - they only receive the minimum necessary information and are bound by strict confidentiality agreements</li>
+                    <li><strong>With Your Consent:</strong> If we ever need to share your data for any other reason, we will always ask for your explicit permission first</li>
+                </ul>
+                <p style="font-weight: 600; color: var(--baby-pink);">Your trust is our priority. We will never sell, rent, or trade your personal information to advertisers or marketers.</p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">👶</span>
+                    Children's Privacy
+                </h2>
+                <p>Our application is designed for parents and caregivers over 18 years old. While the app helps you care for your baby, we do not knowingly collect personal information directly from children under 13. All data is provided by parents/guardians about their babies for care purposes only.</p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">⚖️</span>
+                    Your Rights
+                </h2>
+                <div class="info-badge">
+                    💪 You Have Full Control
+                </div>
+                <p>You have the following rights regarding your data:</p>
+                <ul>
+                    <li><strong>Right of Access:</strong> View all data we have stored about you and your baby</li>
+                    <li><strong>Right to Edit:</strong> Update your profile information, baby details, and preferences at any time</li>
+                    <li><strong>Right to Delete:</strong> Permanently delete your account and all associated data through our secure 3-step verification process</li>
+                    <li><strong>Right to Object:</strong> Opt-out of certain data processing activities, including notifications and analytics</li>
+                    <li><strong>Right to Portability:</strong> Request a copy of your data in a portable format</li>
+                    <li><strong>Right to Withdraw Consent:</strong> Change your mind about data processing permissions at any time</li>
+                </ul>
+                <p style="font-weight: 700; background: var(--soft-peach); padding: 16px; border-radius: 12px; margin-top: 20px;">
+                    <strong style="color: var(--baby-pink);">Account Deletion:</strong> Profile → Settings → Hidden Settings (•••) → Delete Account. 
+                    Learn more at our <a href="account-deletion.html" style="color: var(--calm-sky); text-decoration: underline;">Account Deletion Guide</a>
+                </p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🔔</span>
+                    Notifications & Communications
+                </h2>
+                <p>For premium users, we offer smart notifications to enhance your parenting experience:</p>
+                <ul>
+                    <li><strong>Push Notifications:</strong> AI-generated daily tips, activity suggestions, bonding moments, self-care reminders, feeding tips, sleep advice, and evening reflections (7 categories)</li>
+                    <li><strong>Email Communications:</strong> Important account updates, subscription information, and optional newsletters</li>
+                    <li><strong>Full Control:</strong> All notifications can be managed or disabled at any time in your device settings or app preferences</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🔗</span>
+                    Third-Party Links
+                </h2>
+                <p>Our application may contain links to third-party websites or services for additional resources. Please note that we are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies before sharing any personal information.</p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">🌍</span>
+                    International Data Transfers
+                </h2>
+                <p>Your data may be stored and processed in servers located in different countries, including the United States, where our service providers (Firebase, Google Cloud) operate. We ensure that all international transfers comply with applicable data protection laws, including GDPR and KVKK.</p>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">⏱️</span>
+                    Data Retention
+                </h2>
+                <p>We retain your personal data only as long as necessary to provide our services and fulfill the purposes outlined in this policy:</p>
+                <ul>
+                    <li><strong>Active Accounts:</strong> Data is retained while your account is active</li>
+                    <li><strong>Deleted Accounts:</strong> All data is permanently deleted immediately upon account deletion</li>
+                    <li><strong>Legal Requirements:</strong> Some data may be retained longer if required by law</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>
+                    <span class="section-icon">📝</span>
+                    Policy Changes
+                </h2>
+                <p>We may update this privacy policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons. When we make significant changes, we will:</p>
+                <ul>
+                    <li>Update the "Last Updated" date at the top of this policy</li>
+                    <li>Notify you through the app or via email</li>
+                    <li>Give you the opportunity to review the changes before they take effect</li>
+                </ul>
+                <p>We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+            </section>
+
+            <div class="contact-box">
+                <h2>
+                    <span class="section-icon" style="background: rgba(255, 255, 255, 0.25);">📧</span>
+                    Contact Us
+                </h2>
+                <p style="font-size: 16px; margin-bottom: 24px; font-weight: 600; line-height: 1.8;">
+                    We're here to help! If you have any questions, concerns, or requests regarding this privacy policy or your data:
+                </p>
+                <ul>
+                    <li><strong style="color: white;">Email:</strong> <a href="mailto:babeeapp@gmail.com">babeeapp@gmail.com</a></li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 14px; opacity: 0.9; font-weight: 600;">
+                    We aim to respond to all inquiries within 48 hours. Your privacy matters to us, and we're committed to addressing your concerns promptly and thoroughly.
+                </p>
+            </div>
+
+            <footer>
+                <p><strong>© 2025 Babee. All rights reserved.</strong></p>
+                <p style="margin-top: 12px; font-size: 13px; opacity: 0.8;">
+                    Made with 💜 for parents everywhere
+                </p>
+            </footer>
         </div>
-
-        <footer>
-            <p><strong>© 2025 Babee. All rights reserved.</strong></p>
-        </footer>
     </div>
 </body>
 </html>
