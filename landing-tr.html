@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Babee - Yapay zeka destekli kişiselleştirilmiş bebek bakım asistanı. 7/24 destek, günlük ipuçları ve akıllı bildirimler ile ebeveynlik yolculuğunuzda yanınızdayız.">
+    <title>Babee | Yapay Zeka Destekli Ebeveynlik Asistanınız</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --soft-peach: #ebe2fc;
+            --gentle-coral: #deb9da;
+            --baby-pink: #a18bc3;
+            --warm-beige: #fbd1d5;
+            --calm-sky: #db8db8;
+            --text-dark: #4a3f6e;
+            --text-light: #8a82a6;
+            --border-light: #ded9e6;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--baby-pink);
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .bg-shape-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--calm-sky);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 3s;
+        }
+
+        .bg-shape-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--warm-beige);
+            top: 40%;
+            left: -100px;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(40px, 40px) rotate(90deg); }
+            50% { transform: translate(0, 80px) rotate(180deg); }
+            75% { transform: translate(-40px, 40px) rotate(270deg); }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .sparkle-1 { top: 10%; left: 15%; font-size: 24px; animation-delay: 0s; }
+        .sparkle-2 { top: 20%; right: 20%; font-size: 18px; animation-delay: 1s; }
+        .sparkle-3 { top: 70%; left: 10%; font-size: 20px; animation-delay: 2s; }
+        .sparkle-4 { top: 80%; right: 15%; font-size: 16px; animation-delay: 0.5s; }
+        .sparkle-5 { top: 45%; right: 8%; font-size: 26px; animation-delay: 1.5s; }
+        .sparkle-6 { top: 60%; left: 85%; font-size: 22px; animation-delay: 2.5s; }
+
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0.3; transform: translateY(0) scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: translateY(-30px) scale(1.3) rotate(180deg); }
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+        }
+
+        .language-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switch a.active {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+        }
+
+        .language-switch a:not(.active):hover {
+            background: var(--soft-peach);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 32px;
+            display: block;
+            border-radius: 36px;
+            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.4);
+            animation: bounce 3s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            padding: 20px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            margin: 10px;
+            box-shadow: 0 12px 32px rgba(161, 139, 195, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.6);
+        }
+
+        .cta-secondary {
+            background: var(--card-bg);
+            color: var(--baby-pink);
+            border: 3px solid var(--baby-pink);
+        }
+
+        .hero-badges {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: var(--card-bg);
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-dark);
+            box-shadow: 0 6px 16px rgba(74, 63, 110, 0.1);
+        }
+
+        .section {
+            padding: 100px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 32px;
+            box-shadow: 0 12px 32px rgba(74, 63, 110, 0.1);
+            border: 2px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: "✨";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            opacity: 0.3;
+            animation: cardSparkle 4s infinite ease-in-out;
+        }
+
+        @keyframes cardSparkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.6; transform: scale(1.2) rotate(180deg); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 48px rgba(161, 139, 195, 0.2);
+            border-color: var(--baby-pink);
+        }
+
+        .feature-icon {
+            font-size: 56px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .premium-section {
+            background: var(--card-bg);
+            border-radius: 48px;
+            padding: 80px 40px;
+            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-section::before {
+            content: "✨";
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            font-size: 48px;
+            opacity: 0.2;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .premium-item {
+            background: linear-gradient(135deg, rgba(161, 139, 195, 0.05), rgba(219, 141, 184, 0.05));
+            padding: 24px;
+            border-radius: 20px;
+            border-left: 4px solid var(--baby-pink);
+            transition: all 0.3s ease;
+        }
+
+        .premium-item:hover {
+            transform: translateX(8px);
+            background: linear-gradient(135deg, rgba(161, 139, 195, 0.1), rgba(219, 141, 184, 0.1));
+        }
+
+        .premium-item h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .premium-item p {
+            color: var(--text-light);
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .testimonial {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.1);
+            border: 2px solid var(--border-light);
+        }
+
+        .quote {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .author {
+            color: var(--baby-pink);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .final-cta {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .final-cta h2 {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--card-bg);
+            border-top: 3px solid var(--border-light);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--baby-pink);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--calm-sky);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .tagline { font-size: 18px; }
+            .logo { width: 120px; height: 120px; }
+            .section-title { font-size: 32px; }
+            .section { padding: 60px 20px; }
+            .premium-section { padding: 60px 24px; border-radius: 32px; }
+            .cta-button { padding: 16px 32px; font-size: 16px; }
+            .hero-badges { flex-direction: column; align-items: center; }
+            .sparkle { display: none; }
+            .language-switch { top: 10px; right: 10px; padding: 6px; }
+            .language-switch a { padding: 8px 16px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="landing.html">EN</a>
+        <a href="landing-tr.html" class="active">TR</a>
+    </div>
+
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="sparkle sparkle-1">✨</div>
+    <div class="sparkle sparkle-2">⭐</div>
+    <div class="sparkle sparkle-3">✨</div>
+    <div class="sparkle sparkle-4">💫</div>
+    <div class="sparkle sparkle-5">⭐</div>
+    <div class="sparkle sparkle-6">💫</div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <img src="appIcon.png" alt="Babee" class="logo">
+            <h1>Babee</h1>
+            <p class="tagline">Yapay zeka destekli ebeveynlik yardımcınız<br>7/24 destek • Kişiselleştirilmiş tavsiyeler • Akıllı bildirimler</p>
+            
+            <div>
+                <a href="#" class="cta-button">App Store'dan İndir</a>
+                <a href="#features" class="cta-button cta-secondary">Daha Fazla Bilgi</a>
+            </div>
+
+            <div class="hero-badges">
+                <span class="badge">📱 iOS 14.0+</span>
+                <span class="badge">🌍 23 Dil</span>
+                <span class="badge">💜 Ebeveynlerin Güvenilir Tercihi</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="features">
+        <div class="container">
+            <h2 class="section-title">Ebeveynlik Yolculuğunuz İçin İhtiyacınız Olan Her Şey</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🤖</span>
+                    <h3 class="feature-title">AI Asistan</h3>
+                    <p class="feature-description">Sesli ve görüntülü sohbet ile anında yanıtlar alın. Tüm ebeveynlik sorularınız ve endişeleriniz için 7/24 hizmetinizdeyiz.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💡</span>
+                    <h3 class="feature-title">Günlük İpuçları</h3>
+                    <p class="feature-description">Bebeğinizin yaşına ve gelişim aşamasına özel kişiselleştirilmiş tavsiyeler her gün almanızı sağlar.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🔔</span>
+                    <h3 class="feature-title">Akıllı Bildirimler</h3>
+                    <p class="feature-description">AI tarafından oluşturulan aktivite, beslenme, uyku ipuçları ve motivasyon mesajları gün boyunca sizinle.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">👶</span>
+                    <h3 class="feature-title">Çoklu Bebek</h3>
+                    <p class="feature-description">Tüm çocuklarınız için profiller oluşturun ve her biri için kişiselleştirilmiş içerik alın.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3 class="feature-title">Güvenli ve Gizli</h3>
+                    <p class="feature-description">Verileriniz şifrelenir ve asla paylaşılmaz. GDPR uyumlu, bilgileriniz üzerinde tam kontrole sahipsiniz.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🌍</span>
+                    <h3 class="feature-title">23 Dil</h3>
+                    <p class="feature-description">Ana dilinizde destek alın. İngilizceden Arapçaya, Japoncadan İspanyolcaya kadar geniş dil desteği.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="premium-section">
+                <h2 class="section-title">Premium Özellikler</h2>
+                <p style="text-align: center; font-size: 20px; color: var(--text-light); font-weight: 600; max-width: 700px; margin: 0 auto 40px;">
+                    Bir fincan kahve fiyatına sınırsız destek ve kişiselleştirilmiş rehberliğin keyfini çıkarın
+                </p>
+                
+                <div class="premium-grid">
+                    <div class="premium-item">
+                        <h3>🔄 Sınırsız Yenileme</h3>
+                        <p>Günlük limit olmadan ihtiyacınız olduğunda yeni ipuçları ve tavsiyeler alın</p>
+                    </div>
+                    
+                    <div class="premium-item">
+                        <h3>🎙️ Sesli ve Görüntülü Sohbet</h3>
+                        <p>AI asistan ile sesli ve görüntülü modlar aracılığıyla doğal konuşmalar yapın</p>
+                    </div>
+                    
+                    <div class="premium-item">
+                        <h3>🔔 Akıllı Bildirimler</h3>
+                        <p>7 kategori kişiselleştirilmiş hatırlatıcı ve motivasyon mesajı</p>
+                    </div>
+                    
+                    <div class="premium-item">
+                        <h3>👶 Çoklu Bebek</h3>
+                        <p>Her biri için kişiselleştirilmiş içerik ile sınırsız çocuk takibi</p>
+                    </div>
+                    
+                    <div class="premium-item">
+                        <h3>💬 Sınırsız Sohbet</h3>
+                        <p>Mesaj limiti olmadan istediğiniz kadar soru sorun</p>
+                    </div>
+                    
+                    <div class="premium-item">
+                        <h3>⭐ Öncelikli Destek</h3>
+                        <p>İhtiyaç duyduğunuzda daha hızlı yanıtlar ve özel yardım alın</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 48px;">
+                    <a href="#" class="cta-button">Premium'u Hemen Başlat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Ebeveynler Ne Diyor</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="quote">"Uyku ipuçları hayat kurtarıcıydı! Babee sayesinde bebeğimin uyku düzenini anladım ve artık ikimiz de daha iyi uyuyoruz."</p>
+                    <p class="author">— Ayşe, 4 aylık bebek annesi</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="quote">"AI asistanı çok seviyorum! Gece saat 2'de bir şeyden endişelendiğimde anında cevap alabilmek paha biçilemez."</p>
+                    <p class="author">— Mehmet, yeni baba</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="quote">"Sesli sohbet özelliği harika. Yemek yaparken ya da bebeğime bakarken soru sorabiliyor um. Premium her kuruşuna değer!"</p>
+                    <p class="author">— Zeynep, 2 çocuk annesi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-cta">
+        <div class="container">
+            <h2>Ebeveynlik Yolculuğunuzu Dönüştürmeye Hazır Mısınız?</h2>
+            <p>Kişiselleştirilmiş bebek bakım desteği için Babee'ye güvenen binlerce ebeveyne katılın</p>
+            <a href="#" class="cta-button">Babee'yi Hemen İndirin</a>
+        </div>
+    </div>
+
+    <footer>
+        <p style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">© 2025 Babee. Tüm hakları saklıdır.</p>
+        <p style="color: var(--text-light); font-size: 14px; margin-bottom: 24px;">Her yerdeki ebeveynler için 💜 ile yapıldı</p>
+        <div class="footer-links">
+            <a href="tr.html">Gizlilik Politikası</a>
+            <a href="support-tr.html">Destek</a>
+            <a href="mailto:babeeapp@gmail.com">İletişim</a>
+        </div>
+    </footer>
+</body>
+</html>
