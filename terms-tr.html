@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babee - Kullanım Şartları (EULA)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --soft-peach: #ebe2fc;
+            --gentle-coral: #deb9da;
+            --baby-pink: #a18bc3;
+            --warm-beige: #fbd1d5;
+            --calm-sky: #db8db8;
+            --text-dark: #4a3f6e;
+            --text-light: #8a82a6;
+            --border-light: #ded9e6;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--baby-pink);
+            top: -100px;
+            left: -100px;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--calm-sky);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, 30px) rotate(90deg); }
+            50% { transform: translate(0, 60px) rotate(180deg); }
+            75% { transform: translate(-30px, 30px) rotate(270deg); }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: sparkleFloat 3s infinite ease-in-out;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0.3; transform: translateY(0) scale(1); }
+            50% { opacity: 1; transform: translateY(-20px) scale(1.2); }
+        }
+
+        .sparkle-1 { top: 15%; left: 10%; font-size: 20px; }
+        .sparkle-2 { top: 25%; right: 15%; font-size: 16px; animation-delay: 1s; }
+        .sparkle-3 { top: 60%; left: 8%; font-size: 18px; animation-delay: 2s; }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+        }
+
+        .language-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switch a.active {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 48px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.15);
+            border: 2px solid var(--border-light);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 12px 32px rgba(161, 139, 195, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .update-date {
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 12px;
+            display: inline-block;
+            background: var(--soft-peach);
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--border-light);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 16px rgba(161, 139, 195, 0.3);
+        }
+
+        h3 {
+            color: var(--baby-pink);
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        ul, ol {
+            margin-left: 0;
+            margin-bottom: 20px;
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            line-height: 1.7;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        strong {
+            color: var(--baby-pink);
+            font-weight: 800;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(161, 139, 195, 0.1), rgba(219, 141, 184, 0.1));
+            padding: 24px;
+            border-radius: 20px;
+            border-left: 5px solid var(--baby-pink);
+            margin: 24px 0;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 48px;
+            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.4);
+        }
+
+        .contact-box h2 {
+            color: white;
+            border: none;
+            margin-top: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-box a {
+            color: #FFD54F;
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 3px solid var(--border-light);
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .card { padding: 32px 24px; }
+            h1 { font-size: 28px; }
+            .logo { width: 100px; height: 100px; }
+            .sparkle { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="terms.html">EN</a>
+        <a href="terms-tr.html" class="active">TR</a>
+    </div>
+
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <div class="sparkle sparkle-1">✨</div>
+    <div class="sparkle sparkle-2">⭐</div>
+    <div class="sparkle sparkle-3">✨</div>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <img src="appIcon.png" alt="Babee" class="logo">
+                <h1>Kullanım Şartları (EULA)</h1>
+                <p class="subtitle">Babee Uygulaması • Son Kullanıcı Lisans Sözleşmesi</p>
+                <span class="update-date">📅 Son Güncelleme: 11 Kasım 2025</span>
+            </div>
+
+            <section>
+                <p style="font-size: 16px; font-weight: 600; line-height: 1.9;">
+                    Babee'ye hoş geldiniz! Bu Son Kullanıcı Lisans Sözleşmesi ("Sözleşme"), Babee mobil uygulamasının ("Uygulama") kullanımınızı düzenler. Babee'yi indirerek, erişerek veya kullanarak bu şartları kabul etmiş olursunuz.
+                </p>
+            </section>
+
+            <h2>
+                <span class="section-icon">📱</span>
+                1. Lisans Verme
+            </h2>
+            <p>Bu Şartlara uymanız koşuluyla, size aşağıdaki hakları içeren sınırlı, münhasır olmayan, devredilemez ve geri alınabilir bir lisans veriyoruz:</p>
+            <ul>
+                <li>Uygulamayı kişisel mobil cihazınıza indirmek ve yüklemek</li>
+                <li>Uygulamaya kişisel, ticari olmayan amaçlarla erişmek ve kullanmak</li>
+                <li>Uygulamanın güncellemelerini ve iyileştirmelerini almak</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">🚫</span>
+                2. Kısıtlamalar
+            </h2>
+            <p>Aşağıdakileri YAPMAMAYĪ kabul ediyorsunuz:</p>
+            <ul>
+                <li>Uygulamayı kopyalamak, değiştirmek, dağıtmak veya türev çalışmalar oluşturmak</li>
+                <li>Uygulamayı tersine mühendislik yapmak, derlemek veya parçalarına ayırmak</li>
+                <li>Uygulamadan telif hakkı veya mülkiyet bildirimlerini kaldırmak</li>
+                <li>Uygulamayı herhangi bir yasadışı veya yetkisiz amaç için kullanmak</li>
+                <li>Hesap kimlik bilgilerinizi başkalarıyla paylaşmak</li>
+                <li>Uygulamayı başkalarına zarar vermek, taciz etmek veya haklarını ihlal etmek için kullanmak</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">💎</span>
+                3. Premium Abonelik
+            </h2>
+            
+            <h3>3.1 Abonelik Detayları</h3>
+            <p><strong>Premium Üyelik - Aylık:</strong> Sınırsız yapay zeka sohbeti, kişiselleştirilmiş günlük tavsiyeler, akıllı bildirimler, çoklu bebek profilleri, sınırsız içerik yenileme ve öncelikli destek dahil tüm premium özelliklere sınırsız erişim.</p>
+            
+            <h3>3.2 Otomatik Yenileme</h3>
+            <ul>
+                <li>Abonelikler, mevcut dönemin bitiminden en az 24 saat önce iptal edilmedikçe otomatik olarak yenilenir</li>
+                <li>Hesabınızdan ücret, mevcut dönemin bitiminden 24 saat önce tahsil edilecektir</li>
+                <li>Abonelikleri yönetebilir ve otomatik yenilemeyi cihazınızın Hesap Ayarlarından kapatabilirsiniz</li>
+            </ul>
+
+            <h3>3.3 Fiyatlandırma</h3>
+            <ul>
+                <li>Abonelik fiyatları Uygulamada görüntülenir ve bölgeye göre değişiklik gösterebilir</li>
+                <li>Fiyatlar bildirimle değiştirilebilir</li>
+                <li>Ödeme, satın alma onayında Apple ID hesabınıza yansıtılacaktır</li>
+            </ul>
+
+            <h3>3.4 Ücretsiz Deneme (varsa)</h3>
+            <ul>
+                <li>Bir abonelik satın aldığınızda, ücretsiz deneme süresinin kullanılmayan kısmı kaybedilecektir</li>
+                <li>Ücretsiz deneme uygunluğu Apple tarafından belirlenir</li>
+            </ul>
+
+            <h3>3.5 İptal</h3>
+            <ul>
+                <li>Aboneliğinizi istediğiniz zaman cihaz ayarlarınızdan iptal edebilirsiniz</li>
+                <li>İptal, mevcut fatura döneminin sonunda geçerli olur</li>
+                <li>Kısmi abonelik dönemleri için iade yapılmaz</li>
+            </ul>
+
+            <h3>3.6 Satın Alımları Geri Yükle</h3>
+            <ul>
+                <li>Premium ekranındaki "Satın Alımları Geri Yükle" butonuna tıklayarak önceki satın alımlarınızı geri yükleyebilirsiniz</li>
+                <li>Bu, premium özelliklerinize birden fazla cihazdan erişmenizi sağlar</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">💳</span>
+                4. Ödeme ve İade
+            </h2>
+            <ul>
+                <li>Tüm ödemeler Apple'ın App Store'u üzerinden işlenir</li>
+                <li>İade talepleri Apple'ın destek kanalları üzerinden yapılmalıdır</li>
+                <li>İlk kez abone olanlar için 30 günlük para iade garantisi sunuyoruz</li>
+                <li>İade uygunluğu Apple'ın iade politikalarına tabidir</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">🏥</span>
+                5. Tıbbi Sorumluluk Reddi
+            </h2>
+            <div class="highlight">
+                <p style="font-weight: 700; margin-bottom: 16px;">ÖNEMLİ: Babee Tıbbi Bir Hizmet DEĞİLDİR</p>
+                <ul style="margin-bottom: 0;">
+                    <li>Uygulama, yalnızca eğitim amaçlı genel ebeveynlik bilgisi ve tavsiyeleri sağlar</li>
+                    <li>İçerik, profesyonel tıbbi tavsiye, teşhis veya tedavinin yerini TUTMAZ</li>
+                    <li>Bebeğinizin sağlığı hakkında sorularınız varsa her zaman çocuk doktorunuzdan veya nitelikli bir sağlık uzmanından tavsiye alın</li>
+                    <li>Bu Uygulamadan aldığınız bilgiler nedeniyle profesyonel tıbbi tavsiyeyi asla göz ardı etmeyin veya bunu geciktirmeyin</li>
+                    <li>Tıbbi acil durumlarda, yerel acil servislerinizi hemen arayın</li>
+                </ul>
+            </div>
+
+            <h2>
+                <span class="section-icon">⚖️</span>
+                6. Sorumluluk Sınırlaması
+            </h2>
+            <p>YASALARIN İZİN VERDİĞİ AZAMI ÖLÇÜDE:</p>
+            <ul>
+                <li>Uygulama, herhangi bir garanti olmaksızın "OLDUĞU GİBİ" sağlanır</li>
+                <li>Kesintisiz veya hatasız çalışmayı garanti etmiyoruz</li>
+                <li>Dolaylı, arızi, özel veya sonuç olarak ortaya çıkan zararlardan sorumlu değiliz</li>
+                <li>Toplam sorumluluğumuz, son 12 ayda Uygulama için ödediğiniz tutarı aşmayacaktır</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">🔒</span>
+                7. Gizlilik ve Veri
+            </h2>
+            <p>Gizliliğiniz bizim için önemlidir. Veri uygulamalarımız, bu Şartlara referansla dahil edilen <a href="tr.html" style="color: var(--baby-pink); text-decoration: underline; font-weight: 700;">Gizlilik Politikamız</a> tarafından yönetilir. Önemli noktalar:</p>
+            <ul>
+                <li>Verileri Gizlilik Politikamızda açıklandığı şekilde topluyoruz ve kullanıyoruz</li>
+                <li>Verilerinizi kontrol edersiniz ve hesabınızı istediğiniz zaman silebilirsiniz</li>
+                <li>Bilgilerinizi korumak için endüstri standardı güvenlik önlemleri kullanıyoruz</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">🛡️</span>
+                8. Fikri Mülkiyet
+            </h2>
+            <ul>
+                <li>Tüm Uygulama içeriği, özellikleri ve işlevselliği Babee'ye aittir</li>
+                <li>Ticari markalarımız, logolarımız ve marka özelliklerimiz korunmaktadır</li>
+                <li>İzin almadan fikri mülkiyetimizi kullanamazsınız</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">🔄</span>
+                9. Güncellemeler ve Değişiklikler
+            </h2>
+            <ul>
+                <li>Özellik eklemek veya sorunları düzeltmek için Uygulamayı güncelleyebiliriz</li>
+                <li>Uygulamayı kullanmaya devam etmek için güncellemeler gerekebilir</li>
+                <li>Bu Şartları bildirimle istediğimiz zaman değiştirebiliriz</li>
+                <li>Değişikliklerden sonra kullanmaya devam etmek, kabul anlamına gelir</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">❌</span>
+                10. Sonlandırma
+            </h2>
+            <p>Aşağıdaki durumlarda Uygulamaya erişiminizi sonlandırabiliriz:</p>
+            <ul>
+                <li>Bu Şartları ihlal ederseniz</li>
+                <li>Hileli veya zararlı faaliyetlerde bulunursanız</li>
+                <li>Uygulamayı işimize veya diğer kullanıcılara zarar verecek şekilde kullanırsanız</li>
+            </ul>
+            <p>Sonlandırma durumunda, Uygulamayı kullanmayı bırakmalı ve cihazınızdan silmelisiniz.</p>
+
+            <h2>
+                <span class="section-icon">🌍</span>
+                11. Geçerli Hukuk
+            </h2>
+            <p>Bu Şartlar Türkiye yasalarına tabidir. Her türlü anlaşmazlık Türkiye mahkemelerinde çözülecektir.</p>
+
+            <h2>
+                <span class="section-icon">📧</span>
+                12. İletişim Bilgileri
+            </h2>
+            <p>Bu Şartlar hakkında sorularınız mı var? Bize ulaşın:</p>
+            <ul>
+                <li><strong>E-posta:</strong> babeeapp@gmail.com</li>
+            </ul>
+
+            <h2>
+                <span class="section-icon">✅</span>
+                13. Kabul
+            </h2>
+            <div class="highlight">
+                <p style="font-weight: 700;">BABEE UYGULAMASINI İNDİREREK, YÜKLEYEREK VEYA KULLANARAK, BU KULLANIM ŞARTLARINI OKUDUĞUNUZU, ANLADIĞINIZI VE BUNLARA BAĞLI KALMAYI KABUL ETTİĞİNİZİ BELİRTİRSİNİZ.</p>
+            </div>
+
+            <div class="contact-box">
+                <h2>
+                    <span class="section-icon" style="background: rgba(255, 255, 255, 0.25);">💬</span>
+                    Sorularınız veya Endişeleriniz mi Var?
+                </h2>
+                <p style="font-size: 16px; margin-bottom: 24px; font-weight: 600; line-height: 1.8;">
+                    Yardım etmek için buradayız! Bu şartlar veya verileriniz hakkında sorularınız varsa:
+                </p>
+                <ul>
+                    <li><strong style="color: white;">E-posta:</strong> <a href="mailto:babeeapp@gmail.com">babeeapp@gmail.com</a></li>
+                </ul>
+                <p style="margin-top: 24px; font-size: 14px; opacity: 0.9; font-weight: 600;">
+                    Genellikle 48 saat içinde yanıt veriyoruz.
+                </p>
+            </div>
+
+            <footer>
+                <p><strong>© 2025 Babee. Tüm hakları saklıdır.</strong></p>
+                <p style="margin-top: 12px; font-size: 13px; opacity: 0.8;">
+                    Her yerdeki ebeveynler için 💜 ile yapıldı
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
