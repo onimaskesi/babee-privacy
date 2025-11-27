@@ -17,15 +17,21 @@
             --baby-pink: #a18bc3;
             --warm-beige: #fbd1d5;
             --calm-sky: #db8db8;
-            --text-dark: #4a3f6e;
-            --text-light: #8a82a6;
+            --text-dark: #ffffff;
+            --text-light: #f5f0ff;
             --border-light: #ded9e6;
-            --card-bg: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.25);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--gentle-coral) 50%, var(--baby-pink) 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, 
+                #e8d5f5 0%, 
+                #f2d9e8 25%, 
+                #d4b8e0 50%, 
+                #e8c5d8 75%, 
+                #c9a8d4 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -35,205 +41,707 @@
             overflow: hidden;
         }
 
-        .bg-shape {
+        /* Advanced Background Animation */
+        .bg-gradient {
             position: fixed;
-            border-radius: 50%;
-            opacity: 0.1;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(161, 139, 195, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(219, 141, 184, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(251, 209, 213, 0.25) 0%, transparent 50%);
+            animation: gradientRotate 20s linear infinite;
             z-index: 0;
-            animation: float 20s infinite ease-in-out;
         }
 
-        .bg-shape-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--baby-pink);
-            top: -150px;
-            left: -150px;
-            animation-delay: 0s;
-        }
-
-        .bg-shape-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--calm-sky);
-            bottom: -200px;
-            right: -200px;
-            animation-delay: 3s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(40px, 40px) rotate(90deg); }
-            50% { transform: translate(0, 80px) rotate(180deg); }
-            75% { transform: translate(-40px, 40px) rotate(270deg); }
-        }
-
-        .sparkle {
-            position: fixed;
-            pointer-events: none;
-            z-index: 5;
-            animation: sparkleFloat 3s infinite ease-in-out;
-        }
-
-        .sparkle-1 { top: 10%; left: 15%; font-size: 24px; animation-delay: 0s; }
-        .sparkle-2 { top: 20%; right: 20%; font-size: 18px; animation-delay: 1s; }
-        .sparkle-3 { bottom: 30%; left: 10%; font-size: 20px; animation-delay: 2s; }
-        .sparkle-4 { bottom: 20%; right: 15%; font-size: 16px; animation-delay: 0.5s; }
-
-        @keyframes sparkleFloat {
-            0%, 100% { opacity: 0.3; transform: translateY(0) scale(1) rotate(0deg); }
-            50% { opacity: 1; transform: translateY(-30px) scale(1.3) rotate(180deg); }
-        }
-
-        .container {
-            text-align: center;
-            background: var(--card-bg);
-            padding: 60px 48px;
-            border-radius: 48px;
-            box-shadow: 0 20px 60px rgba(74, 63, 110, 0.2);
-            border: 2px solid var(--border-light);
-            max-width: 500px;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 32px;
-            display: block;
-            border-radius: 32px;
-            box-shadow: 0 16px 48px rgba(161, 139, 195, 0.4);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.05); }
-        }
-
-        .success-icon {
-            font-size: 72px;
-            margin-bottom: 24px;
-            animation: successPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes successPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: 900;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        p {
-            color: var(--text-light);
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        .loader {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--border-light);
-            border-top-color: var(--baby-pink);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
+        @keyframes gradientRotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .status {
-            margin-top: 24px;
-            font-size: 14px;
-            color: var(--text-light);
-            font-weight: 600;
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: 1;
+            animation: floatOrb 20s infinite ease-in-out;
         }
 
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #a18bc3, #db8db8);
+            top: -250px;
+            left: -250px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #deb9da, #fbd1d5);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 7s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #ebe2fc, #a18bc3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 3.5s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(80px, -80px) scale(1.1);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translate(0, -120px) scale(0.9);
+                opacity: 0.25;
+            }
+            75% { 
+                transform: translate(-80px, -80px) scale(1.05);
+                opacity: 0.35;
+            }
+        }
+
+        /* Elegant SVG Sparkles */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+            animation: sparkleFloat 4s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .sparkle svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 8px rgba(161, 139, 195, 0.4));
+        }
+
+        .sparkle-1 { top: 12%; left: 18%; width: 24px; height: 24px; animation-delay: 0s; }
+        .sparkle-2 { top: 25%; right: 22%; width: 18px; height: 18px; animation-delay: 1.3s; }
+        .sparkle-3 { bottom: 35%; left: 12%; width: 20px; height: 20px; animation-delay: 2.1s; }
+        .sparkle-4 { bottom: 18%; right: 18%; width: 16px; height: 16px; animation-delay: 0.7s; }
+        .sparkle-5 { top: 45%; left: 88%; width: 22px; height: 22px; animation-delay: 1.8s; }
+        .sparkle-6 { top: 65%; left: 8%; width: 18px; height: 18px; animation-delay: 2.5s; }
+
+        @keyframes sparkleFloat {
+            0%, 100% { 
+                opacity: 0.2; 
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: translateY(-40px) rotate(180deg) scale(1.4);
+            }
+        }
+
+        /* Glassmorphism Container */
+        .container {
+            text-align: center;
+            background: rgba(161, 139, 195, 0.25);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            padding: 72px 56px;
+            border-radius: 56px;
+            box-shadow: 
+                0 40px 80px rgba(74, 63, 110, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 0 100px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            max-width: 560px;
+            position: relative;
+            z-index: 10;
+            animation: fadeInScale 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes fadeInScale {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.9);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Container Glow Effect */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                rgba(161, 139, 195, 0.6), 
+                rgba(219, 141, 184, 0.6),
+                rgba(161, 139, 195, 0.6));
+            border-radius: 56px;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(20px);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Logo with 3D Effect */
+        .logo {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 40px;
+            display: block;
+            border-radius: 36px;
+            box-shadow: 
+                0 20px 60px rgba(161, 139, 195, 0.5),
+                0 0 0 8px rgba(255, 255, 255, 0.1),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: floatLogo 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { 
+                transform: translateY(0) rotateY(0deg);
+            }
+            50% { 
+                transform: translateY(-20px) rotateY(5deg);
+            }
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotateY(10deg);
+        }
+
+        /* Success Icon with Premium SVG */
+        .success-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 32px;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 10px 30px rgba(161, 139, 195, 0.4));
+            animation: successBounce 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        .success-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .checkmark-circle {
+            stroke: url(#gradient1);
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            animation: drawCircle 1s ease-out forwards;
+        }
+
+        .checkmark-check {
+            stroke: url(#gradient2);
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: drawCheck 0.6s ease-out 0.5s forwards;
+        }
+
+        @keyframes drawCircle {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes successBounce {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+            }
+            25% { 
+                transform: scale(1.15) rotate(-5deg);
+            }
+            75% { 
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        /* Particle Ring */
+        .particle-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, var(--baby-pink), var(--calm-sky));
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleBurst 2s ease-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 0; left: 50%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 15%; right: 15%; animation-delay: 0.15s; }
+        .particle:nth-child(3) { top: 50%; right: 0; animation-delay: 0.3s; }
+        .particle:nth-child(4) { bottom: 15%; right: 15%; animation-delay: 0.45s; }
+        .particle:nth-child(5) { bottom: 0; left: 50%; animation-delay: 0.6s; }
+        .particle:nth-child(6) { bottom: 15%; left: 15%; animation-delay: 0.75s; }
+        .particle:nth-child(7) { top: 50%; left: 0; animation-delay: 0.9s; }
+        .particle:nth-child(8) { top: 15%; left: 15%; animation-delay: 1.05s; }
+
+        @keyframes particleBurst {
+            0% {
+                transform: scale(0) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1) translateY(-30px);
+                opacity: 0;
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 38px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            text-shadow: 
+                0 2px 10px rgba(161, 139, 195, 0.5),
+                0 4px 20px rgba(219, 141, 184, 0.3),
+                0 0 40px rgba(255, 255, 255, 0.2);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 
+                    0 2px 10px rgba(161, 139, 195, 0.5),
+                    0 4px 20px rgba(219, 141, 184, 0.3),
+                    0 0 40px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    0 2px 15px rgba(161, 139, 195, 0.7),
+                    0 4px 30px rgba(219, 141, 184, 0.5),
+                    0 0 60px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        p {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            text-shadow: 0 2px 8px rgba(161, 139, 195, 0.4);
+            opacity: 0.95;
+        }
+
+        /* Premium Loader */
+        .loader-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .loader {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: var(--baby-pink);
+            border-right-color: var(--calm-sky);
+            border-radius: 50%;
+            animation: spinLoader 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        .loader-ring:nth-child(2) {
+            animation-delay: 0.15s;
+            border-top-color: var(--calm-sky);
+            border-right-color: var(--baby-pink);
+        }
+
+        .loader-ring:nth-child(3) {
+            animation-delay: 0.3s;
+            opacity: 0.6;
+        }
+
+        @keyframes spinLoader {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(0.9); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Status Badge */
+        .status {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 8px 20px rgba(74, 63, 110, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.15);
+            animation: statusPulse 2s ease-in-out infinite;
+            text-shadow: 0 2px 8px rgba(161, 139, 195, 0.5);
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 8px 20px rgba(74, 63, 110, 0.15),
+                    inset 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 
+                    0 10px 30px rgba(74, 63, 110, 0.25),
+                    inset 0 0 30px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            display: inline-flex;
+            gap: 8px;
+            margin-left: 12px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--baby-pink);
+            border-radius: 50%;
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { 
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% { 
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 48px 32px;
-                border-radius: 32px;
-                margin: 20px;
+                padding: 56px 40px;
+                border-radius: 40px;
+                margin: 24px;
+                max-width: calc(100% - 48px);
             }
-            .logo { width: 100px; height: 100px; }
-            h1 { font-size: 28px; }
-            .success-icon { font-size: 60px; }
+            
+            .logo { 
+                width: 110px; 
+                height: 110px;
+                margin-bottom: 32px;
+            }
+            
+            h1 { font-size: 32px; }
+            
+            .success-icon { font-size: 72px; }
+            
+            p { 
+                font-size: 16px;
+                margin-bottom: 32px;
+            }
+            
             .sparkle { display: none; }
+            
+            .orb {
+                filter: blur(40px);
+                opacity: 0.2;
+            }
+        }
+
+        /* Dark mode compatibility (optional) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --card-bg: rgba(74, 63, 110, 0.25);
+                --glass-bg: rgba(74, 63, 110, 0.2);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bg-shape bg-shape-1"></div>
-    <div class="bg-shape bg-shape-2"></div>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    
+    <!-- Floating Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-    <div class="sparkle sparkle-1">✨</div>
-    <div class="sparkle sparkle-2">⭐</div>
-    <div class="sparkle sparkle-3">✨</div>
-    <div class="sparkle sparkle-4">💫</div>
+    <!-- Sparkles -->
+    <div class="sparkle sparkle-1">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#sparkleGradient1)" />
+            <defs>
+                <linearGradient id="sparkleGradient1" x1="2" y1="2" x2="22" y2="22">
+                    <stop offset="0%" style="stop-color:#a18bc3;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#db8db8;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="sparkle sparkle-2">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#sparkleGradient2)" />
+            <defs>
+                <linearGradient id="sparkleGradient2" x1="2" y1="2" x2="22" y2="22">
+                    <stop offset="0%" style="stop-color:#deb9da;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#a18bc3;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="sparkle sparkle-3">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#sparkleGradient3)" />
+            <defs>
+                <linearGradient id="sparkleGradient3" x1="2" y1="2" x2="22" y2="22">
+                    <stop offset="0%" style="stop-color:#a18bc3;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#fbd1d5;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="sparkle sparkle-4">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#sparkleGradient4)" />
+            <defs>
+                <linearGradient id="sparkleGradient4" x1="2" y1="2" x2="22" y2="22">
+                    <stop offset="0%" style="stop-color:#db8db8;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#deb9da;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="sparkle sparkle-5">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#sparkleGradient5)" />
+            <defs>
+                <linearGradient id="sparkleGradient5" x1="2" y1="2" x2="22" y2="22">
+                    <stop offset="0%" style="stop-color:#a18bc3;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#db8db8;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="sparkle sparkle-6">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="url(#sparkleGradient6)" />
+            <defs>
+                <linearGradient id="sparkleGradient6" x1="2" y1="2" x2="22" y2="22">
+                    <stop offset="0%" style="stop-color:#fbd1d5;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#a18bc3;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
 
+    <!-- Main Container -->
     <div class="container">
         <img src="appIcon.png" alt="Babee" class="logo">
-        <div class="success-icon">✅</div>
+        
+        <div class="success-wrapper">
+            <div class="success-icon">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#a18bc3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#db8db8;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#7c5ba3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#b76b9a;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="checkmark-circle" cx="50" cy="50" r="45"/>
+                    <polyline class="checkmark-check" points="30,50 45,65 70,35"/>
+                </svg>
+            </div>
+            <div class="particle-ring">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+
         <h1>Login Successful!</h1>
         <p>Redirecting you back to Babee app...</p>
-        <div class="loader"></div>
-        <div class="status" id="status">Processing your login...</div>
+        
+        <div class="loader-wrapper">
+            <div class="loader">
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+            </div>
+        </div>
+        
+        <div class="status" id="status">
+            Processing your login
+            <span class="progress-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </span>
+        </div>
     </div>
 
     <script>
-        // Facebook/Instagram OAuth callback handler
+        // OAuth Callback Handler
         const statusEl = document.getElementById('status');
         
+        const statusMessages = [
+            'Processing your login',
+            'Verifying credentials',
+            'Securing your session',
+            'Almost there',
+            'Redirecting to app'
+        ];
+        
+        let messageIndex = 0;
+        
         function updateStatus(message) {
-            statusEl.textContent = message;
+            const dotsHTML = `
+                <span class="progress-dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </span>
+            `;
+            statusEl.innerHTML = message + dotsHTML;
         }
+
+        // Cycle through status messages
+        const statusInterval = setInterval(() => {
+            if (messageIndex < statusMessages.length) {
+                updateStatus(statusMessages[messageIndex]);
+                messageIndex++;
+            } else {
+                clearInterval(statusInterval);
+            }
+        }, 800);
 
         // Handle OAuth callback
         setTimeout(() => {
-            updateStatus('Verifying credentials...');
-            
             if (window.location.hash) {
+                // Handle hash-based OAuth (e.g., Facebook/Instagram implicit flow)
                 const hash = window.location.hash.substring(1);
-                updateStatus('Redirecting to app...');
                 
-                // Redirect to mobile app
+                // Try to redirect to mobile app
+                window.location = 'babee://auth/callback?' + hash;
+                
+                // Fallback: show completion message
                 setTimeout(() => {
-                    window.location = 'babee://auth/callback?' + hash;
-                }, 1000);
+                    clearInterval(statusInterval);
+                    statusEl.innerHTML = 'Login complete! Opening app...';
+                }, 2000);
+                
             } else if (window.location.search) {
+                // Handle query-based OAuth
                 const search = window.location.search.substring(1);
-                updateStatus('Redirecting to app...');
+                
+                window.location = 'babee://auth/callback?' + search;
                 
                 setTimeout(() => {
-                    window.location = 'babee://auth/callback?' + search;
-                }, 1000);
+                    clearInterval(statusInterval);
+                    statusEl.innerHTML = 'Login complete! Opening app...';
+                }, 2000);
+                
             } else {
-                updateStatus('Login complete! You can close this window.');
+                // No OAuth data - just show completion
+                clearInterval(statusInterval);
+                statusEl.innerHTML = 'Login complete! You can close this window.';
+                
+                // Auto-close after 3 seconds
                 setTimeout(() => {
                     window.close();
                 }, 3000);
             }
-        }, 1500);
+        }, 3000);
+
+        // Fallback for when app can't be opened
+        setTimeout(() => {
+            clearInterval(statusInterval);
+            statusEl.innerHTML = 'Please return to the Babee app to continue';
+        }, 8000);
     </script>
 </body>
 </html>
